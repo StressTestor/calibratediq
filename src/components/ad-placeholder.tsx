@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import Script from 'next/script';
 
 interface AdPlaceholderProps {
   zone: 'banner' | 'sidebar' | 'interstitial' | 'native';
@@ -14,7 +17,7 @@ const ZONE_SIZES: Record<AdPlaceholderProps['zone'], { width: string; height: st
 
 const ZONE_ENV_MAP: Record<AdPlaceholderProps['zone'], string | undefined> = {
   banner: process.env.NEXT_PUBLIC_MONETAG_BANNER_ZONE,
-  sidebar: process.env.NEXT_PUBLIC_MONETAG_NATIVE_ZONE,
+  sidebar: process.env.NEXT_PUBLIC_MONETAG_BANNER_ZONE,
   interstitial: process.env.NEXT_PUBLIC_MONETAG_INTERSTITIAL_ZONE,
   native: process.env.NEXT_PUBLIC_MONETAG_NATIVE_ZONE,
 };
@@ -24,8 +27,7 @@ export function AdPlaceholder({ zone, className = '' }: AdPlaceholderProps): Rea
   const zoneId = ZONE_ENV_MAP[zone];
   const { width, height } = ZONE_SIZES[zone];
 
-  // Dev mode - no site ID configured
-  if (!siteId) {
+  if (!siteId || !zoneId) {
     return (
       <div
         className={`flex items-center justify-center border-2 border-dashed border-neutral-300 dark:border-neutral-600 rounded text-neutral-400 dark:text-neutral-500 text-sm select-none ${className}`}
@@ -36,14 +38,13 @@ export function AdPlaceholder({ zone, className = '' }: AdPlaceholderProps): Rea
     );
   }
 
-  // Production mode - render Monetag container
   return (
-    <div
-      className={className}
-      style={{ width, height }}
-      data-monetag-site={siteId}
-      data-monetag-zone={zoneId}
-      data-monetag-type={zone}
-    />
+    <div className={className}>
+      <div id={`container-${zoneId}`} style={{ minWidth: width, minHeight: height }} />
+      <Script
+        src={`https://alwingore.com/js/${zoneId}/invoke.js`}
+        strategy="afterInteractive"
+      />
+    </div>
   );
 }

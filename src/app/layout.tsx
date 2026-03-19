@@ -93,10 +93,19 @@ export default function RootLayout({
         <CookieConsent />
 
         {monetagSiteId && (
-          <Script
-            src={`https://alwingore.com/js/site/${monetagSiteId}.js`}
-            strategy="afterInteractive"
-          />
+          <>
+            {/* Monetag multi-tag: handles popunder, vignette, in-page push */}
+            <Script
+              src={`https://alwingore.com/js/site/${monetagSiteId}.js`}
+              strategy="afterInteractive"
+            />
+            {/* Monetag anti-adblock fallback */}
+            <Script
+              src="https://quge5.com/88/tag.min.js"
+              data-zone={process.env.NEXT_PUBLIC_MONETAG_MULTITAG_ZONE}
+              strategy="afterInteractive"
+            />
+          </>
         )}
       </body>
     </html>
