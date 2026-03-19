@@ -37,21 +37,21 @@ export function CookieConsent(): React.ReactNode {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 p-3 bg-neutral-100 dark:bg-neutral-800 border-t border-neutral-200 dark:border-neutral-700 shadow-lg">
       <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-3">
-        <p className="text-xs text-neutral-500 dark:text-neutral-400 flex-1">
+        <p className="text-xs text-neutral-600 dark:text-neutral-300 flex-1">
           This site uses cookies for analytics and advertising. By continuing, you accept our cookie policy.
         </p>
         <div className="flex gap-2 shrink-0">
           <button
             onClick={handleDecline}
             type="button"
-            className="px-3 py-1.5 text-xs rounded border border-neutral-300 dark:border-neutral-600 text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
+            className="px-3 py-1.5 text-xs rounded border border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
           >
             Decline
           </button>
           <button
             onClick={handleAccept}
             type="button"
-            className="px-3 py-1.5 text-xs rounded bg-teal-600 text-white hover:bg-teal-700 transition-colors"
+            className="px-3 py-1.5 text-xs font-medium rounded bg-teal-700 text-white hover:bg-teal-800 transition-colors"
           >
             Accept
           </button>
