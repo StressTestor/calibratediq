@@ -1,65 +1,103 @@
-import Image from "next/image";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { AdPlaceholder } from '@/components/ad-placeholder';
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: 'CalibratedIQ - Free IQ Test Based on Raven\'s Progressive Matrices',
+  description:
+    'A free, scientifically-grounded IQ assessment based on Raven\'s Progressive Matrices methodology. 30 progressive matrix puzzles measuring fluid intelligence through pattern recognition.',
+  openGraph: {
+    title: 'CalibratedIQ - Free IQ Test',
+    description:
+      'A free, scientifically-grounded IQ assessment based on Raven\'s Progressive Matrices methodology.',
+    url: 'https://calibratediq.org',
+  },
+};
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="max-w-2xl mx-auto px-4 py-12 sm:py-20">
+      {/* Hero */}
+      <div className="text-center mb-12">
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+          Calibrated IQ Test
+        </h1>
+        <p className="text-base sm:text-lg text-muted max-w-xl mx-auto leading-relaxed">
+          A free, scientifically-grounded assessment based on Raven&apos;s
+          Progressive Matrices methodology
+        </p>
+      </div>
+
+      {/* Info sections */}
+      <div className="grid gap-8 mb-12">
+        <div className="border border-border dark:border-border-dark rounded-lg p-5">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-2">
+            What this test measures
+          </h2>
+          <p className="text-sm leading-relaxed">
+            Fluid intelligence (gf) through abstract pattern recognition.
+            Each puzzle presents a matrix of geometric patterns with one
+            missing element. You identify the rule governing the pattern
+            and select the correct missing piece.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="border border-border dark:border-border-dark rounded-lg p-5">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-2">
+            How long it takes
+          </h2>
+          <p className="text-sm leading-relaxed">
+            Approximately 15 minutes. There is no strict time limit, but
+            the test records your completion time. Most people finish
+            within 10 to 20 minutes.
+          </p>
         </div>
-      </main>
+
+        <div className="border border-border dark:border-border-dark rounded-lg p-5">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-2">
+            How it works
+          </h2>
+          <p className="text-sm leading-relaxed">
+            30 progressive matrix puzzles across 3 difficulty levels: easy
+            (questions 1-10), medium (11-22), and hard (23-30). Difficulty
+            increases through the test as patterns involve more simultaneous
+            transformations.
+          </p>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div className="flex justify-center mb-12">
+        <Link
+          href="/test"
+          className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
+        >
+          Begin Test
+        </Link>
+      </div>
+
+      {/* Disclaimer */}
+      <div className="border-t border-border dark:border-border-dark pt-6 mb-8">
+        <p className="text-xs text-muted leading-relaxed">
+          This test is not affiliated with Mensa International. For official
+          testing, visit{' '}
+          <a
+            href="https://www.mensa.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-text dark:hover:text-text-dark transition-colors"
+          >
+            mensa.org
+          </a>
+          . This assessment uses the same psychometric methodology (progressive
+          matrices) used in standardized intelligence testing.
+        </p>
+      </div>
+
+      {/* Ad */}
+      <div className="flex justify-center">
+        <AdPlaceholder zone="banner" />
+      </div>
     </div>
   );
 }
