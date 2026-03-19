@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# calibratediq.org
 
-## Getting Started
+a free online IQ test that generates Raven's Progressive Matrices-style puzzles, scores them against a real normal distribution, and gives you a shareable results page.
 
-First, run the development server:
+i built this because every "free IQ test" online is either a scam, requires an email to see your score, or uses trivia questions that have nothing to do with actual intelligence testing. this one uses the same methodology (progressive matrices) used in standardized testing. no signup, no paywall, no email harvesting.
+
+## what it does
+
+- 30 procedurally generated matrix puzzles across 3 difficulty tiers
+- 8 composable visual transformations (rotate, reflect, scale, color shift, shape swap, count change, overlay, position shift)
+- deterministic puzzle generation via seeded PRNG — same seed = same test, so scores are verifiable
+- IQ scoring on a real normal distribution (mean 100, SD 15, range 55-145)
+- results page with bell curve visualization, percentile rank, and share buttons
+- answers encoded in the URL, not the score — you can't fake your results by editing the URL
+- dark mode, mobile responsive, cookie consent, ad placeholders
+
+## stack
+
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS v4
+- Vercel
+- no database, no backend — all scoring is client-side
+
+## running locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
+pnpm test       # 44 tests (PRNG, scoring, transforms, puzzle validation)
+pnpm build      # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## how scoring works
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+raw score (correct out of 30) maps to IQ via the inverse normal CDF:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| raw score | IQ | percentile | classification |
+|-----------|-----|------------|----------------|
+| 0 | 55 | <1 | Below 70 |
+| 10 | ~85 | ~16 | Below Average |
+| 15 | 100 | 50 | Average |
+| 20 | ~115 | ~84 | Above Average |
+| 25 | ~130 | ~98 | Highly Gifted |
+| 30 | 145 | >99 | Profoundly Gifted |
 
-## Learn More
+## puzzle generation
 
-To learn more about Next.js, take a look at the following resources:
+each puzzle selects 1-3 transforms based on difficulty, applies them across a grid (2x2 for easy, 3x3 for medium/hard), removes one cell as the answer, and generates 5 distractors that each violate exactly one rule. transforms operate on orthogonal dimensions so composition order doesn't matter.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+the test validation harness (in the test suite) checks all 30 puzzles across multiple seeds to verify every distractor differs from the answer in exactly one dimension.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## env vars
 
-## Deploy on Vercel
+| var | purpose |
+|-----|---------|
+| `NEXT_PUBLIC_MONETAG_SITE_ID` | enables Monetag ad script loading |
+| `NEXT_PUBLIC_MONETAG_NATIVE_ZONE` | native ad zone ID |
+| `NEXT_PUBLIC_MONETAG_BANNER_ZONE` | banner ad zone ID |
+| `NEXT_PUBLIC_MONETAG_INTERSTITIAL_ZONE` | interstitial ad zone ID |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+without these set, ad placements render as placeholder divs in dev mode.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## disclaimer
+
+this is not a clinical diagnostic tool. not affiliated with Mensa International. for entertainment and educational purposes. the methodology (progressive matrices) is public domain (J.C. Raven, 1936).
