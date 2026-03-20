@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
 };
 
-const monetagSiteId = process.env.NEXT_PUBLIC_MONETAG_SITE_ID;
+const monetagSiteId = process.env.NEXT_PUBLIC_MONETAG_SITE_ID?.trim();
 
 export default function RootLayout({
   children,
@@ -105,7 +105,7 @@ export default function RootLayout({
             {/* Monetag anti-adblock fallback */}
             <Script
               src="https://quge5.com/88/tag.min.js"
-              data-zone={process.env.NEXT_PUBLIC_MONETAG_MULTITAG_ZONE}
+              data-zone={process.env.NEXT_PUBLIC_MONETAG_MULTITAG_ZONE?.trim()}
               strategy="afterInteractive"
             />
           </>
