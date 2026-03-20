@@ -5,18 +5,45 @@ import { AdPlaceholder } from '@/components/ad-placeholder';
 export const metadata: Metadata = {
   title: 'CalibratedIQ - Free IQ Test Based on Raven\'s Progressive Matrices',
   description:
-    'A free, scientifically-grounded IQ assessment based on Raven\'s Progressive Matrices methodology. 30 progressive matrix puzzles measuring fluid intelligence through pattern recognition.',
+    'Take a free IQ test online based on Raven\'s Progressive Matrices. 30 pattern recognition puzzles measuring fluid intelligence. Get your IQ score, percentile rank, and shareable results instantly.',
   openGraph: {
     title: 'CalibratedIQ - Free IQ Test',
     description:
-      'A free, scientifically-grounded IQ assessment based on Raven\'s Progressive Matrices methodology.',
+      'Free online IQ test based on Raven\'s Progressive Matrices. 30 pattern recognition puzzles, instant scoring, and shareable results.',
     url: 'https://calibratediq.org',
   },
 };
 
 export default function HomePage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Quiz',
+    name: 'Calibrated IQ Test',
+    description: 'A free, scientifically-grounded IQ assessment based on Raven\'s Progressive Matrices methodology. 30 progressive matrix puzzles measuring fluid intelligence through pattern recognition.',
+    educationalLevel: 'All levels',
+    about: {
+      '@type': 'Thing',
+      name: 'Fluid Intelligence',
+      description: 'The ability to reason and solve novel problems independent of previously acquired knowledge',
+    },
+    provider: {
+      '@type': 'Organization',
+      name: 'CalibratedIQ',
+      url: 'https://calibratediq.org',
+    },
+    numberOfQuestions: 30,
+    timeRequired: 'PT15M',
+    isAccessibleForFree: true,
+    inLanguage: 'en',
+  };
+
   return (
-    <div className="max-w-2xl mx-auto px-4 py-12 sm:py-20">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="max-w-2xl mx-auto px-4 py-12 sm:py-20">
       {/* Hero */}
       <div className="text-center mb-12">
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
@@ -99,5 +126,6 @@ export default function HomePage() {
         <AdPlaceholder zone="banner" />
       </div>
     </div>
+    </>
   );
 }

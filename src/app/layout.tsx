@@ -22,8 +22,21 @@ export const metadata: Metadata = {
     monetag: 'ea3318283a4679bd550669792643d35d',
   },
   description:
-    'A free, scientifically-grounded IQ assessment based on Raven\'s Progressive Matrices methodology. Measures fluid intelligence through pattern recognition.',
+    'Take a free IQ test based on Raven\'s Progressive Matrices. 30 pattern recognition puzzles measuring fluid intelligence. Get your IQ score, percentile rank, and shareable results instantly.',
+  keywords: [
+    'free IQ test',
+    'IQ test online',
+    'Raven\'s Progressive Matrices',
+    'pattern recognition IQ test',
+    'fluid intelligence test',
+    'IQ score',
+    'intelligence test',
+    'cognitive assessment',
+  ],
   metadataBase: new URL('https://calibratediq.org'),
+  alternates: {
+    canonical: 'https://calibratediq.org',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',

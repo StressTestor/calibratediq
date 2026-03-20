@@ -2,14 +2,17 @@ import type { Metadata } from 'next';
 import { AdPlaceholder } from '@/components/ad-placeholder';
 
 export const metadata: Metadata = {
-  title: 'About the Test',
+  title: 'How IQ Testing Works — Raven\'s Progressive Matrices Explained',
   description:
-    'Learn about the Raven\'s Progressive Matrices methodology behind CalibratedIQ, how scoring works, and what IQ scores mean.',
+    'Learn how IQ tests work and how Raven\'s Progressive Matrices measures fluid intelligence. Understand IQ scoring, percentile ranks, classifications, and what your score means.',
   openGraph: {
-    title: 'About the Test | CalibratedIQ',
+    title: 'How IQ Testing Works — Raven\'s Progressive Matrices Explained | CalibratedIQ',
     description:
-      'Learn about the Raven\'s Progressive Matrices methodology behind CalibratedIQ.',
+      'Learn how Raven\'s Progressive Matrices measures fluid intelligence, how IQ scoring works, and what your score means.',
     url: 'https://calibratediq.org/about',
+  },
+  alternates: {
+    canonical: 'https://calibratediq.org/about',
   },
 };
 
