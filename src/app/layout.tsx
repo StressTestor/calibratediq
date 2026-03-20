@@ -73,7 +73,13 @@ export default function RootLayout({
             >
               CalibratedIQ
             </Link>
-            <nav>
+            <nav className="flex items-center gap-4">
+              <Link
+                href="/tests"
+                className="text-sm text-muted hover:text-text dark:hover:text-text-dark transition-colors"
+              >
+                Tests
+              </Link>
               <Link
                 href="/learn"
                 className="text-sm text-muted hover:text-text dark:hover:text-text-dark transition-colors"

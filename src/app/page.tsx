@@ -103,6 +103,89 @@ export default function HomePage() {
         </Link>
       </div>
 
+      {/* Choose your test */}
+      <div className="mb-12">
+        <h2 className="text-lg font-semibold tracking-tight mb-4 text-center">
+          choose your test
+        </h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+          <Link
+            href="/test/matrix"
+            className="border border-border dark:border-border-dark rounded-lg p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group"
+          >
+            <span className="text-2xl block mb-1">{'\u25E7'}</span>
+            <span className="text-sm font-medium block mb-0.5">Pattern Recognition</span>
+            <span className="text-xs text-muted block">Visual matrix puzzles</span>
+            <span className="text-xs font-medium text-primary dark:text-primary-light mt-2 block group-hover:underline">
+              Start &rarr;
+            </span>
+          </Link>
+          <Link
+            href="/test/spatial"
+            className="border border-border dark:border-border-dark rounded-lg p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group"
+          >
+            <span className="text-2xl block mb-1">{'\u2B21'}</span>
+            <span className="text-sm font-medium block mb-0.5">Spatial Reasoning</span>
+            <span className="text-xs text-muted block">Mental rotation and folding</span>
+            <span className="text-xs font-medium text-primary dark:text-primary-light mt-2 block group-hover:underline">
+              Start &rarr;
+            </span>
+          </Link>
+          <Link
+            href="/test/numerical"
+            className="border border-border dark:border-border-dark rounded-lg p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group"
+          >
+            <span className="text-2xl block mb-1">{'\u2211'}</span>
+            <span className="text-sm font-medium block mb-0.5">Number Sequences</span>
+            <span className="text-xs text-muted block">Find the numeric pattern</span>
+            <span className="text-xs font-medium text-primary dark:text-primary-light mt-2 block group-hover:underline">
+              Start &rarr;
+            </span>
+          </Link>
+          <Link
+            href="/test/logical"
+            className="border border-border dark:border-border-dark rounded-lg p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group"
+          >
+            <span className="text-2xl block mb-1">{'\u2234'}</span>
+            <span className="text-sm font-medium block mb-0.5">Logical Reasoning</span>
+            <span className="text-xs text-muted block">Syllogisms and deduction</span>
+            <span className="text-xs font-medium text-primary dark:text-primary-light mt-2 block group-hover:underline">
+              Start &rarr;
+            </span>
+          </Link>
+          <Link
+            href="/test/verbal"
+            className="border border-border dark:border-border-dark rounded-lg p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group"
+          >
+            <span className="text-2xl block mb-1">{'\u2261'}</span>
+            <span className="text-sm font-medium block mb-0.5">Verbal Reasoning</span>
+            <span className="text-xs text-muted block">Word analogies and relations</span>
+            <span className="text-xs font-medium text-primary dark:text-primary-light mt-2 block group-hover:underline">
+              Start &rarr;
+            </span>
+          </Link>
+          <Link
+            href="/test/memory"
+            className="border border-border dark:border-border-dark rounded-lg p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors group"
+          >
+            <span className="text-2xl block mb-1">{'\u29C9'}</span>
+            <span className="text-sm font-medium block mb-0.5">Working Memory</span>
+            <span className="text-xs text-muted block">Timed recall challenges</span>
+            <span className="text-xs font-medium text-primary dark:text-primary-light mt-2 block group-hover:underline">
+              Start &rarr;
+            </span>
+          </Link>
+        </div>
+        <div className="text-center">
+          <Link
+            href="/tests"
+            className="text-sm font-medium text-primary dark:text-primary-light hover:underline"
+          >
+            Or take them all for your composite IQ score &rarr;
+          </Link>
+        </div>
+      </div>
+
       {/* Disclaimer */}
       <div className="border-t border-border dark:border-border-dark pt-6 mb-8">
         <p className="text-xs text-muted leading-relaxed">
