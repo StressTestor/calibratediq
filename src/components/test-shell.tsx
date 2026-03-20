@@ -35,6 +35,9 @@ function TestShellContent({
   const [initialized, setInitialized] = useState(false);
   const [clickedIndex, setClickedIndex] = useState<number | null>(null);
   const [revealing, setRevealing] = useState(false);
+  const [interstitial, setInterstitial] = useState<null | 'easy-to-medium' | 'medium-to-hard'>(null);
+  const [analyzing, setAnalyzing] = useState(false);
+  const pendingNavigationRef = useRef<string | null>(null);
   const startTimeRef = useRef<number>(Date.now());
 
   // Parse URL params
@@ -78,6 +81,32 @@ function TestShellContent({
     }
   }, [revealDuration, seedParam, initialized, questionIndex]);
 
+  // Auto-advance after interstitial (3 seconds)
+  useEffect(() => {
+    if (interstitial && pendingNavigationRef.current) {
+      const timer = setTimeout(() => {
+        const url = pendingNavigationRef.current;
+        pendingNavigationRef.current = null;
+        setInterstitial(null);
+        if (url) router.replace(url);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [interstitial, router]);
+
+  // Auto-redirect after analyzing screen (3 seconds)
+  useEffect(() => {
+    if (analyzing && pendingNavigationRef.current) {
+      const timer = setTimeout(() => {
+        const url = pendingNavigationRef.current;
+        pendingNavigationRef.current = null;
+        setAnalyzing(false);
+        if (url) router.replace(url);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [analyzing, router]);
+
   const handleAnswer = useCallback(
     (selectedIndex: number) => {
       if (revealing) return;
@@ -88,20 +117,30 @@ function TestShellContent({
         const newAnswers = answersStr + selectedIndex.toString();
 
         if (questionIndex >= totalQuestions - 1) {
-          // Last question, go to results
+          // Last question — show analyzing screen before results
           const storageKey = `ciq_start_${testSlug}`;
           const elapsed = Math.floor((Date.now() - startTimeRef.current) / 1000);
           sessionStorage.removeItem(storageKey);
-          router.replace(
-            `/results/${testSlug}?s=${encodeSeed(seed)}&a=${newAnswers}&t=${elapsed}`
-          );
+          pendingNavigationRef.current = `/results/${testSlug}?s=${encodeSeed(seed)}&a=${newAnswers}&t=${elapsed}`;
+          setClickedIndex(null);
+          setAnalyzing(true);
+        } else if (questionIndex === 9) {
+          // Easy → Medium transition
+          pendingNavigationRef.current = `/test/${testSlug}?s=${encodeSeed(seed)}&q=${questionIndex + 1}&a=${newAnswers}`;
+          setClickedIndex(null);
+          setInterstitial('easy-to-medium');
+        } else if (questionIndex === 21) {
+          // Medium → Hard transition
+          pendingNavigationRef.current = `/test/${testSlug}?s=${encodeSeed(seed)}&q=${questionIndex + 1}&a=${newAnswers}`;
+          setClickedIndex(null);
+          setInterstitial('medium-to-hard');
         } else {
-          // Next question
+          // Normal next question
           router.replace(
             `/test/${testSlug}?s=${encodeSeed(seed)}&q=${questionIndex + 1}&a=${newAnswers}`
           );
+          setClickedIndex(null);
         }
-        setClickedIndex(null);
       }, 150);
     },
     [answersStr, questionIndex, seed, router, totalQuestions, testSlug, revealing]
@@ -123,6 +162,105 @@ function TestShellContent({
   let difficultyLabel = 'easy';
   if (questionIndex >= 22) difficultyLabel = 'hard';
   else if (questionIndex >= 10) difficultyLabel = 'medium';
+
+  // Analyzing screen — shown after last question before redirect
+  if (analyzing) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-6 sm:py-10">
+        {/* Progress and timer (frozen) */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex-1 mr-4">
+            <ProgressBar current={totalQuestions} total={totalQuestions} />
+          </div>
+          <Timer startTime={startTimeRef.current} running={false} />
+        </div>
+
+        <div className="flex flex-col items-center justify-center min-h-[40vh]">
+          <p className="text-lg font-medium mb-2 analyzing-pulse">
+            Analyzing your responses...
+          </p>
+          <p className="text-sm text-muted mb-8">
+            {totalQuestions} questions completed
+          </p>
+
+          {/* Progress bar animation */}
+          <div className="w-full max-w-xs h-1 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden mb-8">
+            <div className="h-full bg-teal-500 dark:bg-teal-400 rounded-full analyzing-bar" />
+          </div>
+
+          <div className="my-6">
+            <AdPlaceholder zone="banner" />
+          </div>
+        </div>
+
+        <style jsx>{`
+          .analyzing-pulse {
+            animation: pulse-opacity 1.5s ease-in-out infinite;
+          }
+          .analyzing-bar {
+            animation: fill-bar 3s ease-out forwards;
+          }
+          @keyframes pulse-opacity {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+          }
+          @keyframes fill-bar {
+            from { width: 0%; }
+            to { width: 100%; }
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  // Tier transition interstitial
+  if (interstitial) {
+    const isEasyToMedium = interstitial === 'easy-to-medium';
+    const transitionLabel = isEasyToMedium
+      ? 'Easy complete \u2014 moving to Medium'
+      : 'Medium complete \u2014 moving to Hard';
+    const progressCount = isEasyToMedium ? 10 : 22;
+
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-6 sm:py-10">
+        {/* Progress and timer (still visible) */}
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex-1 mr-4">
+            <ProgressBar current={progressCount} total={totalQuestions} />
+          </div>
+          <Timer startTime={startTimeRef.current} running={true} />
+        </div>
+
+        <div className="flex flex-col items-center justify-center min-h-[40vh]">
+          <p className="text-xs font-medium uppercase tracking-widest text-muted mb-3">
+            Difficulty increasing
+          </p>
+          <p className="text-base font-medium mb-6">
+            {transitionLabel}
+          </p>
+
+          {/* Countdown bar */}
+          <div className="w-full max-w-xs h-1 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden mb-8">
+            <div className="h-full bg-teal-500 dark:bg-teal-400 rounded-full interstitial-bar" />
+          </div>
+
+          <div className="my-6">
+            <AdPlaceholder zone="interstitial" />
+          </div>
+        </div>
+
+        <style jsx>{`
+          .interstitial-bar {
+            animation: fill-bar 3s linear forwards;
+          }
+          @keyframes fill-bar {
+            from { width: 0%; }
+            to { width: 100%; }
+          }
+        `}</style>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 sm:py-10">
