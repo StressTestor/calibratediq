@@ -66,13 +66,21 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-bg dark:bg-bg-dark text-text dark:text-text-dark">
         {/* Header */}
         <header className="w-full border-b border-border dark:border-border-dark">
-          <div className="max-w-4xl mx-auto px-4 py-4">
+          <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
             <Link
               href="/"
               className="text-lg font-semibold tracking-tight text-text dark:text-text-dark hover:text-primary dark:hover:text-primary-light transition-colors"
             >
               CalibratedIQ
             </Link>
+            <nav>
+              <Link
+                href="/learn"
+                className="text-sm text-muted hover:text-text dark:hover:text-text-dark transition-colors"
+              >
+                Learn
+              </Link>
+            </nav>
           </div>
         </header>
 
@@ -86,6 +94,12 @@ export default function RootLayout({
               For entertainment and educational purposes. Not a clinical diagnostic tool.
             </p>
             <nav className="flex gap-4">
+              <Link
+                href="/learn"
+                className="text-xs text-muted hover:text-text dark:hover:text-text-dark transition-colors"
+              >
+                Learn
+              </Link>
               <Link
                 href="/about"
                 className="text-xs text-muted hover:text-text dark:hover:text-text-dark transition-colors"
