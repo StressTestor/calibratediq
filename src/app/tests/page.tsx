@@ -89,9 +89,53 @@ export default function TestsPage() {
         <AdPlaceholder zone="banner" />
       </div>
 
-      {/* Test cards grid */}
+      {/* Test cards — first row */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        {TEST_SLUGS.slice(0, 3).map((slug) => {
+          const info = TEST_INFO[slug];
+          return (
+            <div
+              key={slug}
+              className="border border-border dark:border-border-dark rounded-lg p-5 flex flex-col"
+            >
+              <div className="text-3xl mb-3">{info.icon}</div>
+              <h2 className="text-base font-semibold mb-2">{info.name}</h2>
+              <p className="text-sm text-muted mb-4 flex-1">
+                {info.description}
+              </p>
+              <div className="flex items-center justify-between">
+                {info.implemented ? (
+                  <Link
+                    href={`/test/${slug}`}
+                    className="inline-flex items-center text-sm font-medium text-primary dark:text-primary-light hover:underline"
+                  >
+                    Start test &rarr;
+                  </Link>
+                ) : (
+                  <span className="inline-flex items-center text-sm font-medium text-muted">
+                    Coming soon
+                  </span>
+                )}
+                <Link
+                  href={info.learnMoreUrl}
+                  className="text-xs text-muted hover:text-text dark:hover:text-text-dark transition-colors"
+                >
+                  Learn more
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Mid-grid ad */}
+      <div className="flex justify-center my-6">
+        <AdPlaceholder zone="banner" />
+      </div>
+
+      {/* Test cards — second row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-        {TEST_SLUGS.map((slug) => {
+        {TEST_SLUGS.slice(3).map((slug) => {
           const info = TEST_INFO[slug];
           return (
             <div

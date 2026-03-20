@@ -184,6 +184,11 @@ function CompositeContent() {
         />
       </div>
 
+      {/* Ad between chart and breakdown */}
+      <div className="flex justify-center my-6">
+        <AdPlaceholder zone="native" />
+      </div>
+
       {/* Bell Curve */}
       <div className="flex justify-center mb-10">
         <BellCurve iq={compositeIQ} percentile={compositePercentile} />
