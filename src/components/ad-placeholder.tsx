@@ -23,8 +23,8 @@ const ZONE_ENV_MAP: Record<AdPlaceholderProps['zone'], string | undefined> = {
 };
 
 export function AdPlaceholder({ zone, className = '' }: AdPlaceholderProps): React.ReactNode {
-  const siteId = process.env.NEXT_PUBLIC_MONETAG_SITE_ID;
-  const zoneId = ZONE_ENV_MAP[zone];
+  const siteId = process.env.NEXT_PUBLIC_MONETAG_SITE_ID?.trim();
+  const zoneId = ZONE_ENV_MAP[zone]?.trim();
   const { width, height } = ZONE_SIZES[zone];
 
   if (!siteId || !zoneId) {
@@ -39,8 +39,8 @@ export function AdPlaceholder({ zone, className = '' }: AdPlaceholderProps): Rea
   }
 
   return (
-    <div className={className}>
-      <div id={`container-${zoneId}`} style={{ minWidth: width, minHeight: height }} />
+    <div className={`w-full ${className}`}>
+      <div id={`container-${zoneId}`} style={{ width, minHeight: height }} />
       <Script
         src={`https://alwingore.com/js/${zoneId}/invoke.js`}
         strategy="afterInteractive"
