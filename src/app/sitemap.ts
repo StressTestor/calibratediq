@@ -15,9 +15,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'iq-test-accuracy',
   ];
 
+  const testTypes = ['matrix', 'spatial', 'numerical', 'logical', 'verbal', 'memory'];
+
   return [
     { url: baseUrl, lastModified: new Date(), changeFrequency: 'monthly', priority: 1.0 },
     { url: `${baseUrl}/test`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${baseUrl}/tests`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
+    ...testTypes.map((slug) => ({
+      url: `${baseUrl}/test/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
+    { url: `${baseUrl}/composite`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/learn`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
     ...learnArticles.map((slug) => ({
       url: `${baseUrl}/learn/${slug}`,
