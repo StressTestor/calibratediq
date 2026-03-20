@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     default: 'CalibratedIQ - Free IQ Test Based on Raven\'s Progressive Matrices',
     template: '%s | CalibratedIQ',
   },
+  other: {
+    monetag: 'ea3318283a4679bd550669792643d35d',
+  },
   description:
     'A free, scientifically-grounded IQ assessment based on Raven\'s Progressive Matrices methodology. Measures fluid intelligence through pattern recognition.',
   metadataBase: new URL('https://calibratediq.org'),
