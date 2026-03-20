@@ -96,7 +96,7 @@ export async function GET(request: Request) {
         </div>
 
         <div style={{ fontSize: 28, color: '#a0a0a0', marginBottom: 40, display: 'flex' }}>
-          Top {Math.max(0.1, Math.round((100 - percentile) * 10) / 10)}%
+          Scored higher than {percentile}% of the population
         </div>
 
         {/* Simplified bell curve as bars */}
