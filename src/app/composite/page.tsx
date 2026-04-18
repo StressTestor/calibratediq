@@ -16,6 +16,8 @@ import {
   COMPOSITE_WEIGHTS,
   MIN_TESTS_FOR_COMPOSITE,
 } from '@/lib/tests/composite';
+import { loadResults, clearResults } from '@/lib/results-store';
+import { ClearHistoryDialog } from '@/components/clear-history-dialog';
 
 // We need synchronous access to generateQuestion for each test type.
 // Import them directly since this page needs all of them.
@@ -47,8 +49,40 @@ const TEST_META: Record<TestSlug, { icon: string }> = {
 function CompositeContent() {
   const searchParams = useSearchParams();
   const [copied, setCopied] = useState(false);
+  const [confirmClearOpen, setConfirmClearOpen] = useState(false);
 
-  const parsed = useMemo(() => parseCompositeParams(searchParams), [searchParams]);
+  // Source selection: URL params (shared-link case) take precedence over localStorage.
+  // If URL has no test params, fall back to local results.
+  const parsed = useMemo(() => {
+    const fromUrl = parseCompositeParams(searchParams);
+    const hasAnyUrlParam = TEST_SLUGS.some((s) => fromUrl[s] !== null);
+    if (hasAnyUrlParam) return fromUrl;
+
+    const local = loadResults();
+    const result: Record<TestSlug, { seed: string; answers: string } | null> = {
+      matrix: null, spatial: null, numerical: null,
+      logical: null, verbal: null, memory: null,
+    };
+    for (const rec of local) {
+      result[rec.testType as TestSlug] = { seed: rec.seed, answers: rec.answers };
+    }
+    return result;
+  }, [searchParams]);
+
+  const hasLocalResults = useMemo(() => {
+    const fromUrl = parseCompositeParams(searchParams);
+    const urlHasAny = TEST_SLUGS.some((s) => fromUrl[s] !== null);
+    return !urlHasAny && loadResults().length > 0;
+  }, [searchParams]);
+
+  function handleClearConfirm() {
+    clearResults();
+    setConfirmClearOpen(false);
+    // Force re-evaluation: simplest approach is a full reload so parsed/testIQs recompute
+    if (typeof window !== 'undefined') {
+      window.location.reload();
+    }
+  }
 
   // Compute individual IQ scores for each completed test
   const testIQs = useMemo(() => {
@@ -145,9 +179,27 @@ function CompositeContent() {
           </div>
         </div>
 
+        {hasLocalResults && (
+          <div className="flex justify-center mb-4">
+            <button
+              type="button"
+              onClick={() => setConfirmClearOpen(true)}
+              className="text-xs text-muted hover:text-text dark:hover:text-text-dark underline underline-offset-2"
+            >
+              Clear saved results from this device
+            </button>
+          </div>
+        )}
+
         <div className="flex justify-center">
           <AdPlaceholder zone="native" />
         </div>
+
+        <ClearHistoryDialog
+          open={confirmClearOpen}
+          onConfirm={handleClearConfirm}
+          onCancel={() => setConfirmClearOpen(false)}
+        />
       </div>
     );
   }
@@ -299,10 +351,29 @@ function CompositeContent() {
         </div>
       )}
 
+      {/* Local results management */}
+      {hasLocalResults && (
+        <div className="flex justify-center mb-6">
+          <button
+            type="button"
+            onClick={() => setConfirmClearOpen(true)}
+            className="text-xs text-muted hover:text-text dark:hover:text-text-dark underline underline-offset-2"
+          >
+            Clear saved results from this device
+          </button>
+        </div>
+      )}
+
       {/* Bottom ad */}
       <div className="flex justify-center">
         <AdPlaceholder zone="native" />
       </div>
+
+      <ClearHistoryDialog
+        open={confirmClearOpen}
+        onConfirm={handleClearConfirm}
+        onCancel={() => setConfirmClearOpen(false)}
+      />
     </div>
   );
 }

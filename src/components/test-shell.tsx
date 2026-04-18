@@ -3,7 +3,8 @@
 import React, { Suspense, useState, useCallback, useRef, useEffect, ReactNode } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { generateSeed, encodeSeed, decodeSeed } from '@/lib/prng';
-import { encodeAnswers } from '@/lib/scoring';
+import { computeScore, calculatePercentile } from '@/lib/scoring';
+import { saveResult, type TestType as StoreTestType } from '@/lib/results-store';
 import { ProgressBar } from '@/components/progress-bar';
 import { Timer } from '@/components/timer';
 import { AdPlaceholder } from '@/components/ad-placeholder';
@@ -117,10 +118,30 @@ function TestShellContent({
         const newAnswers = answersStr + selectedIndex.toString();
 
         if (questionIndex >= totalQuestions - 1) {
-          // Last question — show analyzing screen before results
+          // Last question — persist result, then show analyzing screen before results
           const storageKey = `ciq_start_${testSlug}`;
           const elapsed = Math.floor((Date.now() - startTimeRef.current) / 1000);
           sessionStorage.removeItem(storageKey);
+
+          // Compute score locally to persist (same logic as results-shell uses)
+          const correctAnswers: number[] = [];
+          for (let i = 0; i < totalQuestions; i++) {
+            correctAnswers.push(generateQuestion(seed, i).correctIndex);
+          }
+          const userAnswerInts = newAnswers.split('').map(Number);
+          const score = computeScore(userAnswerInts, correctAnswers);
+
+          saveResult({
+            testType: testSlug as StoreTestType,
+            iq: score.iq,
+            percentile: calculatePercentile(score.iq),
+            rawScore: score.rawScore,
+            completedAt: new Date().toISOString(),
+            seed: encodeSeed(seed),
+            answers: newAnswers,
+            signature: '', // populated by Fix 2
+          });
+
           pendingNavigationRef.current = `/results/${testSlug}?s=${encodeSeed(seed)}&a=${newAnswers}&t=${elapsed}`;
           setClickedIndex(null);
           setAnalyzing(true);
@@ -143,7 +164,7 @@ function TestShellContent({
         }
       }, 150);
     },
-    [answersStr, questionIndex, seed, router, totalQuestions, testSlug, revealing]
+    [answersStr, questionIndex, seed, router, totalQuestions, testSlug, revealing, generateQuestion]
   );
 
   // Don't render until we have a seed
