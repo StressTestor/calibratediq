@@ -94,12 +94,18 @@ export default function HomePage() {
       </div>
 
       {/* CTA */}
-      <div className="flex justify-center mb-12">
+      <div className="flex flex-col items-center mb-12">
         <Link
-          href="/test"
+          href="/test/matrix"
           className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
         >
           Begin Test
+        </Link>
+        <Link
+          href="/tests"
+          className="mt-4 text-sm text-muted hover:text-text dark:hover:text-text-dark underline underline-offset-2 transition-colors"
+        >
+          Or try other cognitive tests &rarr;
         </Link>
       </div>
 
