@@ -87,10 +87,17 @@ export default function HomePage() {
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
           Calibrated IQ Tests
         </h1>
-        <p className="text-base sm:text-lg text-muted max-w-xl mx-auto leading-relaxed">
-          Six cognitive tests scored on a real IQ scale. Take one for a domain
-          score, or take three or more for a composite IQ and a radar chart of
-          your cognitive profile.
+        <p className="text-base sm:text-lg text-muted max-w-xl mx-auto leading-relaxed mb-5">
+          Six cognitive tests on a normal-distribution IQ scale (mean 100, SD
+          15). Complete one for a domain score, three or more for a composite
+          IQ and cognitive profile.
+        </p>
+        <p className="text-xs text-muted tracking-wide">
+          <span className="font-medium">Free</span>
+          <span className="mx-2 opacity-40">&middot;</span>
+          <span className="font-medium">No signup</span>
+          <span className="mx-2 opacity-40">&middot;</span>
+          <span className="font-medium">Results stored locally</span>
         </p>
       </div>
 
@@ -98,40 +105,40 @@ export default function HomePage() {
       <div className="grid gap-8 mb-12">
         <div className="border border-border dark:border-border-dark rounded-lg p-5">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-2">
-            What you can take
+            Test Battery
           </h2>
           <p className="text-sm leading-relaxed">
-            Six independent tests, 30 questions each, covering pattern
+            Six independent tests of 30 questions each, covering pattern
             recognition, spatial reasoning, number sequences, logical
-            reasoning, verbal reasoning, and working memory. Each test returns
-            its own IQ score on a normal distribution (mean 100, SD 15) plus a
-            percentile rank.
+            reasoning, verbal reasoning, and working memory. Every test returns
+            a calibrated IQ score and percentile rank.
           </p>
         </div>
 
         <div className="border border-border dark:border-border-dark rounded-lg p-5">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-2">
-            How the composite works
+            Composite Scoring
           </h2>
           <p className="text-sm leading-relaxed">
-            Finish any three or more tests and{' '}
+            After three or more tests,{' '}
             <Link href="/composite" className="underline hover:text-text dark:hover:text-text-dark">
               /composite
             </Link>{' '}
-            shows a weighted IQ and a radar chart of your domain profile.
-            Results save to your browser, so you can take more tests over time
-            and watch your composite stabilize.
+            combines your domain scores into a weighted IQ and renders a radar
+            chart of your cognitive profile. Scores persist across sessions, so
+            additional tests refine the estimate over time.
           </p>
         </div>
 
         <div className="border border-border dark:border-border-dark rounded-lg p-5">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-2">
-            What&apos;s stored
+            Privacy &amp; Integrity
           </h2>
           <p className="text-sm leading-relaxed">
-            Results live in your browser&apos;s localStorage only. No account,
-            no email, no server database. Share links are HMAC-signed, so
-            editing the URL to fake a higher score doesn&apos;t work.
+            Results are written to your browser&apos;s localStorage only. No
+            account, no email, no server-side database. Share links are
+            HMAC-signed; modifying the URL invalidates the result, so reported
+            scores cannot be forged.
           </p>
         </div>
       </div>
@@ -140,22 +147,22 @@ export default function HomePage() {
       <div className="flex flex-col items-center mb-12">
         <Link
           href="/test/matrix"
-          className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
+          className="inline-flex items-center justify-center px-8 py-3 text-base font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors shadow-sm"
         >
           Begin Test
         </Link>
         <p className="mt-3 text-xs text-muted">
-          Starts with pattern recognition (~15 min). Pick a different test below.
+          Pattern recognition, 30 questions, approximately 15 minutes.
         </p>
       </div>
 
       {/* Choose your test */}
       <div className="mb-12">
         <h2 className="text-lg font-semibold tracking-tight mb-1 text-center">
-          all six tests
+          All Six Tests
         </h2>
         <p className="text-xs text-muted text-center mb-4">
-          30 questions each. take them in any order.
+          30 questions per test. Take them in any order.
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
           <Link
@@ -228,41 +235,41 @@ export default function HomePage() {
       </div>
 
       {/* Composite CTA */}
-      <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-12 text-center">
-        <h2 className="text-base font-semibold mb-1">composite IQ score</h2>
-        <p className="text-sm text-muted mb-3 leading-relaxed">
-          Finish any three tests to unlock a weighted composite IQ and a radar
-          chart comparing your domain scores.
+      <div className="border border-border dark:border-border-dark rounded-lg p-6 mb-6 text-center">
+        <h2 className="text-base font-semibold mb-1.5">Composite IQ Score</h2>
+        <p className="text-sm text-muted mb-4 leading-relaxed">
+          Complete any three tests to receive a weighted composite IQ and a
+          radar chart comparing your domain scores.
         </p>
         <Link
           href="/composite"
           className="inline-flex items-center text-sm font-medium text-primary dark:text-primary-light hover:underline"
         >
-          View your composite &rarr;
+          View Composite Score &rarr;
         </Link>
       </div>
 
       {/* Learn callout */}
-      <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-12 text-center">
-        <h2 className="text-base font-semibold mb-1">about IQ testing</h2>
-        <p className="text-sm text-muted mb-3 leading-relaxed">
-          Plain-english guides to how IQ is calculated, what the scale means,
-          how accurate these tests are, and the research behind each cognitive
+      <div className="border border-border dark:border-border-dark rounded-lg p-6 mb-12 text-center">
+        <h2 className="text-base font-semibold mb-1.5">Research &amp; Methodology</h2>
+        <p className="text-sm text-muted mb-4 leading-relaxed">
+          Plain-language reference material covering IQ calculation, scale
+          interpretation, test accuracy, and the research behind each cognitive
           domain.
         </p>
         <Link
           href="/learn"
           className="inline-flex items-center text-sm font-medium text-primary dark:text-primary-light hover:underline"
         >
-          Read the guides &rarr;
+          Read the Guides &rarr;
         </Link>
       </div>
 
       {/* Disclaimer */}
       <div className="border-t border-border dark:border-border-dark pt-6 mb-8">
         <p className="text-xs text-muted leading-relaxed">
-          This site is not affiliated with Mensa International. For official
-          testing, visit{' '}
+          CalibratedIQ is an independent project and is not affiliated with
+          Mensa International. For official testing, visit{' '}
           <a
             href="https://www.mensa.org"
             target="_blank"
@@ -271,9 +278,9 @@ export default function HomePage() {
           >
             mensa.org
           </a>
-          . These assessments use established psychometric methodology; scores
-          are for entertainment and educational purposes, not clinical
-          diagnosis.
+          . These assessments draw on established psychometric methodology;
+          scores are provided for educational and entertainment purposes, not
+          clinical diagnosis.
         </p>
       </div>
 
