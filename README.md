@@ -6,13 +6,14 @@ i built this because every "free IQ test" online is either a scam, requires an e
 
 ## what it does
 
-- 30 procedurally generated matrix puzzles across 3 difficulty tiers
-- 8 composable visual transformations (rotate, reflect, scale, color shift, shape swap, count change, overlay, position shift)
-- deterministic puzzle generation via seeded PRNG — same seed = same test, so scores are verifiable
+- 6 test types: matrix, spatial, numerical, logical, verbal, memory — 30 questions each
+- deterministic generation via seeded PRNG — same seed = same test, so scores are verifiable
 - IQ scoring on a real normal distribution (mean 100, SD 15, range 55-145)
 - results page with bell curve visualization, percentile rank, and share buttons
-- answers encoded in the URL, not the score — you can't fake your results by editing the URL
-- dark mode, mobile responsive, cookie consent, ad placeholders
+- composite score: take 3+ tests and get a weighted IQ with a per-domain radar chart
+- results stored locally in the browser — no account, no database, survives page reload
+- result URLs are HMAC-signed server-side. tampering with the query string shows "invalid or has been modified" instead of a fake IQ
+- dark mode, mobile responsive, cookie consent, Monetag ad slots
 
 ## stack
 
@@ -27,7 +28,7 @@ i built this because every "free IQ test" online is either a scam, requires an e
 ```bash
 pnpm install
 pnpm dev        # http://localhost:3000
-pnpm test       # 44 tests (PRNG, scoring, transforms, puzzle validation)
+pnpm test       # vitest (PRNG, scoring, transforms, puzzle validation, signing, rate limit, results store)
 pnpm build      # production build
 ```
 
@@ -52,14 +53,15 @@ the test validation harness (in the test suite) checks all 30 puzzles across mul
 
 ## env vars
 
-| var | purpose |
-|-----|---------|
-| `NEXT_PUBLIC_MONETAG_SITE_ID` | enables Monetag ad script loading |
-| `NEXT_PUBLIC_MONETAG_NATIVE_ZONE` | native ad zone ID |
-| `NEXT_PUBLIC_MONETAG_BANNER_ZONE` | banner ad zone ID |
-| `NEXT_PUBLIC_MONETAG_INTERSTITIAL_ZONE` | interstitial ad zone ID |
+| var | scope | purpose |
+|-----|-------|---------|
+| `RESULT_SIGNING_SECRET` | server | HMAC-SHA256 key for signing result URLs. required in production. 32+ bytes, hex preferred |
+| `NEXT_PUBLIC_MONETAG_SITE_ID` | client | enables Monetag ad script loading |
+| `NEXT_PUBLIC_MONETAG_NATIVE_ZONE` | client | native ad zone ID |
+| `NEXT_PUBLIC_MONETAG_BANNER_ZONE` | client | banner ad zone ID |
+| `NEXT_PUBLIC_MONETAG_INTERSTITIAL_ZONE` | client | interstitial ad zone ID |
 
-without these set, ad placements render as placeholder divs in dev mode.
+without `RESULT_SIGNING_SECRET`, `/api/sign` returns 500 and every result renders as invalid. without the Monetag vars, ad placements render as placeholder divs in dev mode.
 
 ## disclaimer
 
