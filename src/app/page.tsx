@@ -3,13 +3,13 @@ import Link from 'next/link';
 import { AdPlaceholder } from '@/components/ad-placeholder';
 
 export const metadata: Metadata = {
-  title: 'CalibratedIQ - Free IQ Test Based on Raven\'s Progressive Matrices',
+  title: 'CalibratedIQ - Free IQ Tests: Pattern, Spatial, Numerical, Logical, Verbal, Memory',
   description:
-    'Take a free IQ test online based on Raven\'s Progressive Matrices. 30 pattern recognition puzzles measuring fluid intelligence. Get your IQ score, percentile rank, and shareable results instantly.',
+    'Six free cognitive tests scored on a real IQ scale (mean 100, SD 15). Take one for a domain score, or take three or more for a composite IQ and radar chart. No signup, results stored locally.',
   openGraph: {
-    title: 'CalibratedIQ - Free IQ Test',
+    title: 'CalibratedIQ - Six Free IQ Tests + Composite Score',
     description:
-      'Free online IQ test based on Raven\'s Progressive Matrices. 30 pattern recognition puzzles, instant scoring, and shareable results.',
+      'Six cognitive domains: pattern recognition, spatial reasoning, number sequences, logical reasoning, verbal reasoning, working memory. Composite IQ after 3 or more tests.',
     url: 'https://calibratediq.org',
   },
 };
@@ -17,22 +17,60 @@ export const metadata: Metadata = {
 export default function HomePage() {
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Quiz',
-    name: 'Calibrated IQ Test',
-    description: 'A free, scientifically-grounded IQ assessment based on Raven\'s Progressive Matrices methodology. 30 progressive matrix puzzles measuring fluid intelligence through pattern recognition.',
-    educationalLevel: 'All levels',
-    about: {
-      '@type': 'Thing',
-      name: 'Fluid Intelligence',
-      description: 'The ability to reason and solve novel problems independent of previously acquired knowledge',
-    },
+    '@type': 'CollectionPage',
+    name: 'CalibratedIQ - Free Cognitive Tests',
+    description:
+      'Six free IQ tests covering pattern recognition, spatial reasoning, number sequences, logical reasoning, verbal reasoning, and working memory. Each test returns a calibrated IQ and percentile. Three or more tests produce a composite IQ with a radar chart of your cognitive profile.',
+    url: 'https://calibratediq.org',
     provider: {
       '@type': 'Organization',
       name: 'CalibratedIQ',
       url: 'https://calibratediq.org',
     },
-    numberOfQuestions: 30,
-    timeRequired: 'PT15M',
+    hasPart: [
+      {
+        '@type': 'Quiz',
+        name: 'Pattern Recognition',
+        url: 'https://calibratediq.org/test/matrix',
+        about: 'Fluid intelligence via Raven-style progressive matrices',
+        numberOfQuestions: 30,
+      },
+      {
+        '@type': 'Quiz',
+        name: 'Spatial Reasoning',
+        url: 'https://calibratediq.org/test/spatial',
+        about: 'Mental rotation and 3D visualization',
+        numberOfQuestions: 30,
+      },
+      {
+        '@type': 'Quiz',
+        name: 'Number Sequences',
+        url: 'https://calibratediq.org/test/numerical',
+        about: 'Numeric pattern recognition',
+        numberOfQuestions: 30,
+      },
+      {
+        '@type': 'Quiz',
+        name: 'Logical Reasoning',
+        url: 'https://calibratediq.org/test/logical',
+        about: 'Syllogisms and deductive logic',
+        numberOfQuestions: 30,
+      },
+      {
+        '@type': 'Quiz',
+        name: 'Verbal Reasoning',
+        url: 'https://calibratediq.org/test/verbal',
+        about: 'Word analogies and verbal relations',
+        numberOfQuestions: 30,
+      },
+      {
+        '@type': 'Quiz',
+        name: 'Working Memory',
+        url: 'https://calibratediq.org/test/memory',
+        about: 'Short-term recall and attention',
+        numberOfQuestions: 30,
+      },
+    ],
     isAccessibleForFree: true,
     inLanguage: 'en',
   };
@@ -47,11 +85,12 @@ export default function HomePage() {
       {/* Hero */}
       <div className="text-center mb-12">
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-          Calibrated IQ Test
+          Calibrated IQ Tests
         </h1>
         <p className="text-base sm:text-lg text-muted max-w-xl mx-auto leading-relaxed">
-          A free, scientifically-grounded assessment based on Raven&apos;s
-          Progressive Matrices methodology
+          Six cognitive tests scored on a real IQ scale. Take one for a domain
+          score, or take three or more for a composite IQ and a radar chart of
+          your cognitive profile.
         </p>
       </div>
 
@@ -59,36 +98,40 @@ export default function HomePage() {
       <div className="grid gap-8 mb-12">
         <div className="border border-border dark:border-border-dark rounded-lg p-5">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-2">
-            What this test measures
+            What you can take
           </h2>
           <p className="text-sm leading-relaxed">
-            Fluid intelligence (gf) through abstract pattern recognition.
-            Each puzzle presents a matrix of geometric patterns with one
-            missing element. You identify the rule governing the pattern
-            and select the correct missing piece.
+            Six independent tests, 30 questions each, covering pattern
+            recognition, spatial reasoning, number sequences, logical
+            reasoning, verbal reasoning, and working memory. Each test returns
+            its own IQ score on a normal distribution (mean 100, SD 15) plus a
+            percentile rank.
           </p>
         </div>
 
         <div className="border border-border dark:border-border-dark rounded-lg p-5">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-2">
-            How long it takes
+            How the composite works
           </h2>
           <p className="text-sm leading-relaxed">
-            Approximately 15 minutes. There is no strict time limit, but
-            the test records your completion time. Most people finish
-            within 10 to 20 minutes.
+            Finish any three or more tests and{' '}
+            <Link href="/composite" className="underline hover:text-text dark:hover:text-text-dark">
+              /composite
+            </Link>{' '}
+            shows a weighted IQ and a radar chart of your domain profile.
+            Results save to your browser, so you can take more tests over time
+            and watch your composite stabilize.
           </p>
         </div>
 
         <div className="border border-border dark:border-border-dark rounded-lg p-5">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-2">
-            How it works
+            What&apos;s stored
           </h2>
           <p className="text-sm leading-relaxed">
-            30 progressive matrix puzzles across 3 difficulty levels: easy
-            (questions 1-10), medium (11-22), and hard (23-30). Difficulty
-            increases through the test as patterns involve more simultaneous
-            transformations.
+            Results live in your browser&apos;s localStorage only. No account,
+            no email, no server database. Share links are HMAC-signed, so
+            editing the URL to fake a higher score doesn&apos;t work.
           </p>
         </div>
       </div>
@@ -101,19 +144,19 @@ export default function HomePage() {
         >
           Begin Test
         </Link>
-        <Link
-          href="/tests"
-          className="mt-4 text-sm text-muted hover:text-text dark:hover:text-text-dark underline underline-offset-2 transition-colors"
-        >
-          Or try other cognitive tests &rarr;
-        </Link>
+        <p className="mt-3 text-xs text-muted">
+          Starts with pattern recognition (~15 min). Pick a different test below.
+        </p>
       </div>
 
       {/* Choose your test */}
       <div className="mb-12">
-        <h2 className="text-lg font-semibold tracking-tight mb-4 text-center">
-          choose your test
+        <h2 className="text-lg font-semibold tracking-tight mb-1 text-center">
+          all six tests
         </h2>
+        <p className="text-xs text-muted text-center mb-4">
+          30 questions each. take them in any order.
+        </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
           <Link
             href="/test/matrix"
@@ -182,20 +225,43 @@ export default function HomePage() {
             </span>
           </Link>
         </div>
-        <div className="text-center">
-          <Link
-            href="/tests"
-            className="text-sm font-medium text-primary dark:text-primary-light hover:underline"
-          >
-            Or take them all for your composite IQ score &rarr;
-          </Link>
-        </div>
+      </div>
+
+      {/* Composite CTA */}
+      <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-12 text-center">
+        <h2 className="text-base font-semibold mb-1">composite IQ score</h2>
+        <p className="text-sm text-muted mb-3 leading-relaxed">
+          Finish any three tests to unlock a weighted composite IQ and a radar
+          chart comparing your domain scores.
+        </p>
+        <Link
+          href="/composite"
+          className="inline-flex items-center text-sm font-medium text-primary dark:text-primary-light hover:underline"
+        >
+          View your composite &rarr;
+        </Link>
+      </div>
+
+      {/* Learn callout */}
+      <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-12 text-center">
+        <h2 className="text-base font-semibold mb-1">about IQ testing</h2>
+        <p className="text-sm text-muted mb-3 leading-relaxed">
+          Plain-english guides to how IQ is calculated, what the scale means,
+          how accurate these tests are, and the research behind each cognitive
+          domain.
+        </p>
+        <Link
+          href="/learn"
+          className="inline-flex items-center text-sm font-medium text-primary dark:text-primary-light hover:underline"
+        >
+          Read the guides &rarr;
+        </Link>
       </div>
 
       {/* Disclaimer */}
       <div className="border-t border-border dark:border-border-dark pt-6 mb-8">
         <p className="text-xs text-muted leading-relaxed">
-          This test is not affiliated with Mensa International. For official
+          This site is not affiliated with Mensa International. For official
           testing, visit{' '}
           <a
             href="https://www.mensa.org"
@@ -205,8 +271,9 @@ export default function HomePage() {
           >
             mensa.org
           </a>
-          . This assessment uses the same psychometric methodology (progressive
-          matrices) used in standardized intelligence testing.
+          . These assessments use established psychometric methodology; scores
+          are for entertainment and educational purposes, not clinical
+          diagnosis.
         </p>
       </div>
 
