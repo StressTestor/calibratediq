@@ -20,28 +20,57 @@ export const COMPOSITE_LABELS: Record<TestSlug, string> = {
 
 export const MIN_TESTS_FOR_COMPOSITE = 3;
 
-// Parse composite URL params: /composite?mx=SEED.ANSWERS&sp=SEED.ANSWERS&...
-export function parseCompositeParams(searchParams: URLSearchParams): Record<TestSlug, { seed: string; answers: string } | null> {
+export interface CompositeTestParams {
+  seed: string;
+  answers: string;
+  completedAt: string;
+  signature: string;
+}
+
+// Delimiter chosen because none of the fields can contain it:
+// - seed: base36 [0-9a-z]
+// - answers: digits [0-5]
+// - completedAt: ISO 8601 (contains '.', ':', '-', 'T', 'Z' — but no '~')
+// - signature: 'v1:' + hex, no '~'
+const COMPOSITE_FIELD_DELIM = '~';
+
+// Parse composite URL params: /composite?mx=SEED~ANSWERS~COMPLETEDAT~SIGNATURE&sp=...
+// The 4-field format is required after Fix 2; legacy 2-field links (pre-signing)
+// are returned as null so they get excluded from the composite score (fail-closed).
+export function parseCompositeParams(
+  searchParams: URLSearchParams,
+): Record<TestSlug, CompositeTestParams | null> {
   const shortNames: Record<string, TestSlug> = {
     mx: 'matrix', sp: 'spatial', nm: 'numerical',
     lg: 'logical', vb: 'verbal', mm: 'memory',
   };
 
-  const result: Record<string, { seed: string; answers: string } | null> = {};
+  const result: Record<string, CompositeTestParams | null> = {};
   for (const [short, slug] of Object.entries(shortNames)) {
     const value = searchParams.get(short);
-    if (value && value.includes('.')) {
-      const [seed, answers] = value.split('.', 2);
-      result[slug] = { seed, answers };
-    } else {
+    if (!value) {
       result[slug] = null;
+      continue;
     }
+    const parts = value.split(COMPOSITE_FIELD_DELIM);
+    if (parts.length !== 4) {
+      result[slug] = null;
+      continue;
+    }
+    const [seed, answers, completedAt, signature] = parts;
+    if (!seed || !answers || !completedAt || !signature) {
+      result[slug] = null;
+      continue;
+    }
+    result[slug] = { seed, answers, completedAt, signature };
   }
-  return result as Record<TestSlug, { seed: string; answers: string } | null>;
+  return result as Record<TestSlug, CompositeTestParams | null>;
 }
 
 // Build composite URL from individual test results
-export function buildCompositeUrl(tests: Partial<Record<TestSlug, { seed: string; answers: string }>>): string {
+export function buildCompositeUrl(
+  tests: Partial<Record<TestSlug, CompositeTestParams>>,
+): string {
   const slugToShort: Record<TestSlug, string> = {
     matrix: 'mx', spatial: 'sp', numerical: 'nm',
     logical: 'lg', verbal: 'vb', memory: 'mm',
@@ -50,7 +79,10 @@ export function buildCompositeUrl(tests: Partial<Record<TestSlug, { seed: string
   const params = new URLSearchParams();
   for (const [slug, data] of Object.entries(tests)) {
     if (data) {
-      params.set(slugToShort[slug as TestSlug], `${data.seed}.${data.answers}`);
+      params.set(
+        slugToShort[slug as TestSlug],
+        [data.seed, data.answers, data.completedAt, data.signature].join(COMPOSITE_FIELD_DELIM),
+      );
     }
   }
   return `/composite?${params.toString()}`;

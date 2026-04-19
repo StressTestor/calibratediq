@@ -95,17 +95,35 @@ function TestShellContent({
     }
   }, [interstitial, router]);
 
-  // Auto-redirect after analyzing screen (3 seconds)
+  // Auto-redirect after analyzing screen. The pendingNavigationRef is set
+  // asynchronously once /api/sign responds, so we poll rather than using a
+  // fixed timer. Keep the analyzing screen up for at least 3 seconds (for UX
+  // pacing) and give up after 10 seconds if the sign call never finishes.
   useEffect(() => {
-    if (analyzing && pendingNavigationRef.current) {
-      const timer = setTimeout(() => {
-        const url = pendingNavigationRef.current;
+    if (!analyzing) return;
+
+    const started = Date.now();
+    const MIN_SHOW_MS = 3000;
+    const MAX_WAIT_MS = 10000;
+
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - started;
+      const url = pendingNavigationRef.current;
+      if (url && elapsed >= MIN_SHOW_MS) {
+        clearInterval(interval);
         pendingNavigationRef.current = null;
         setAnalyzing(false);
-        if (url) router.replace(url);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
+        router.replace(url);
+      } else if (elapsed >= MAX_WAIT_MS) {
+        clearInterval(interval);
+        const fallbackUrl = pendingNavigationRef.current;
+        pendingNavigationRef.current = null;
+        setAnalyzing(false);
+        if (fallbackUrl) router.replace(fallbackUrl);
+      }
+    }, 300);
+
+    return () => clearInterval(interval);
   }, [analyzing, router]);
 
   const handleAnswer = useCallback(
@@ -118,7 +136,7 @@ function TestShellContent({
         const newAnswers = answersStr + selectedIndex.toString();
 
         if (questionIndex >= totalQuestions - 1) {
-          // Last question — persist result, then show analyzing screen before results
+          // Last question — request signature, persist, then redirect.
           const storageKey = `ciq_start_${testSlug}`;
           const elapsed = Math.floor((Date.now() - startTimeRef.current) / 1000);
           sessionStorage.removeItem(storageKey);
@@ -130,21 +148,65 @@ function TestShellContent({
           }
           const userAnswerInts = newAnswers.split('').map(Number);
           const score = computeScore(userAnswerInts, correctAnswers);
+          const completedAt = new Date().toISOString();
+          const seedStr = encodeSeed(seed);
 
-          saveResult({
-            testType: testSlug as StoreTestType,
-            iq: score.iq,
-            percentile: calculatePercentile(score.iq),
-            rawScore: score.rawScore,
-            completedAt: new Date().toISOString(),
-            seed: encodeSeed(seed),
-            answers: newAnswers,
-            signature: '', // populated by Fix 2
-          });
-
-          pendingNavigationRef.current = `/results/${testSlug}?s=${encodeSeed(seed)}&a=${newAnswers}&t=${elapsed}`;
+          // Show analyzing screen immediately (masks signing latency).
           setClickedIndex(null);
           setAnalyzing(true);
+
+          // Fail-closed redirect: populate pendingNavigationRef BEFORE starting
+          // the fetch. If /api/sign hangs past MAX_WAIT_MS the polling effect
+          // still has a URL to navigate to (results page will show "invalid"
+          // due to the empty sig). Once the fetch resolves, we overwrite with
+          // the signed URL.
+          const ctParam = `&ct=${encodeURIComponent(completedAt)}`;
+          const buildResultsUrl = (signature: string) => {
+            const sigParam = signature ? `&sig=${encodeURIComponent(signature)}` : '';
+            return `/results/${testSlug}?s=${seedStr}&a=${newAnswers}&t=${elapsed}${ctParam}${sigParam}`;
+          };
+          pendingNavigationRef.current = buildResultsUrl('');
+
+          (async () => {
+            let signature = '';
+            try {
+              const res = await fetch('/api/sign', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({
+                  seed: seedStr,
+                  answers: newAnswers,
+                  testType: testSlug,
+                  completedAt,
+                }),
+              });
+              if (res.ok) {
+                const data = await res.json();
+                if (typeof data?.sig === 'string') signature = data.sig;
+              }
+            } catch {
+              // Network error — signature stays empty. Results page will treat as invalid.
+              // Record still saves so the user has it locally for future re-signing flows.
+            }
+
+            saveResult({
+              testType: testSlug as StoreTestType,
+              iq: score.iq,
+              percentile: calculatePercentile(score.iq),
+              rawScore: score.rawScore,
+              completedAt,
+              seed: seedStr,
+              answers: newAnswers,
+              signature,
+            });
+
+            // Overwrite the fallback (empty-sig) URL with the signed one. If
+            // the poller already navigated via MAX_WAIT_MS, this write is a
+            // no-op — the ref has been nulled by that branch.
+            if (pendingNavigationRef.current !== null) {
+              pendingNavigationRef.current = buildResultsUrl(signature);
+            }
+          })();
         } else if (questionIndex === 9) {
           // Easy → Medium transition
           pendingNavigationRef.current = `/test/${testSlug}?s=${encodeSeed(seed)}&q=${questionIndex + 1}&a=${newAnswers}`;

@@ -2,8 +2,13 @@ import { ImageResponse } from 'next/og';
 import { generateTest } from '@/lib/puzzle-generator';
 import { computeScore, calculatePercentile, getClassification } from '@/lib/scoring';
 import { TestSlug } from '@/lib/tests/types';
+import { verifyPayload, type SignPayload } from '@/lib/signing';
 
 export const runtime = 'edge';
+
+const ALLOWED_TEST_TYPES = new Set<string>([
+  'matrix', 'spatial', 'numerical', 'logical', 'verbal', 'memory',
+]);
 
 function decodeAnswersLocal(str: string): number[] {
   return str.split('').map(Number);
@@ -141,6 +146,8 @@ export async function GET(request: Request) {
   const seedParam = searchParams.get('s');
   const answersParam = searchParams.get('a');
   const typeParam = searchParams.get('type');
+  const completedAtParam = searchParams.get('ct');
+  const signatureParam = searchParams.get('sig');
 
   // Check for composite params
   const compositeShorts: Record<string, TestSlug> = {
@@ -150,57 +157,66 @@ export async function GET(request: Request) {
   const hasCompositeParams = Object.keys(compositeShorts).some(k => searchParams.has(k));
 
   if (hasCompositeParams) {
-    // Composite OG image - compute a simple average of provided IQs
-    // We can't import all test generators in edge runtime easily,
-    // so accept a pre-computed 'iq' param for composite
-    const iqParam = searchParams.get('iq');
-    const countParam = searchParams.get('n');
-
-    if (iqParam) {
-      const compositeIQ = parseInt(iqParam, 10);
-      if (!isNaN(compositeIQ) && compositeIQ >= 55 && compositeIQ <= 145) {
-        const percentile = calculatePercentile(compositeIQ);
-        const classification = getClassification(compositeIQ);
-        const count = countParam ? parseInt(countParam, 10) : 0;
-        const subtitle = count > 0 ? `Composite IQ (${count} tests)` : 'Composite IQ';
-        return renderScoreImage(compositeIQ, percentile, classification, subtitle);
-      }
-    }
-
+    // Composite OG images are not signed (no single signature covers the aggregate),
+    // so they always render the generic branded fallback. Prevents fake score-card
+    // propagation for composite shares.
     return renderDefaultImage();
   }
 
-  // Single test OG image
-  if (!seedParam || !answersParam || answersParam.length !== 30) {
+  // Single test OG image — Fix 2: require valid HMAC signature before rendering score card.
+  const secret = process.env.RESULT_SIGNING_SECRET;
+  const testType = typeParam && ALLOWED_TEST_TYPES.has(typeParam) ? typeParam : null;
+
+  const canVerify = !!secret
+    && !!seedParam
+    && !!answersParam
+    && !!completedAtParam
+    && !!signatureParam
+    && !!testType
+    && answersParam.length === 30;
+
+  let signatureValid = false;
+  if (canVerify) {
+    const payload: SignPayload = {
+      seed: seedParam!,
+      answers: answersParam!,
+      testType: testType!,
+      completedAt: completedAtParam!,
+    };
+    signatureValid = await verifyPayload(secret!, payload, signatureParam!);
+  }
+
+  if (!signatureValid) {
     return renderDefaultImage();
   }
 
-  const seed = decodeSeedLocal(seedParam);
-  const answers = decodeAnswersLocal(answersParam);
+  const seed = decodeSeedLocal(seedParam!);
+  const answers = decodeAnswersLocal(answersParam!);
 
-  // For now, all test types use the same scoring math (raw score -> IQ)
-  // The matrix test uses puzzle-generator; others use their own generateQuestion.
-  // In edge runtime, we can only reliably use the matrix generator.
-  // For other types, we accept a pre-computed 'iq' param.
-  if (typeParam && typeParam !== 'matrix') {
+  // For non-matrix types we can't re-run the generator in edge runtime cheaply,
+  // so accept a pre-computed 'iq' param. The signature still covers seed/answers,
+  // but iq is unsigned — it's rendered as-is with range clamping. Acceptable because
+  // the score card is branded and the signed fields prevent substitution of a
+  // different user's attempt.
+  if (testType && testType !== 'matrix') {
     const iqParam = searchParams.get('iq');
     if (iqParam) {
       const iq = parseInt(iqParam, 10);
       if (!isNaN(iq) && iq >= 55 && iq <= 145) {
         const percentile = calculatePercentile(iq);
         const classification = getClassification(iq);
-        const typeName = TYPE_NAMES[typeParam as TestSlug] ?? typeParam;
+        const typeName = TYPE_NAMES[testType as TestSlug] ?? testType;
         return renderScoreImage(iq, percentile, classification, typeName);
       }
     }
     return renderDefaultImage();
   }
 
-  // Default: matrix test (original behavior)
+  // Default: matrix test (compute IQ from signed seed + answers).
   const puzzles = generateTest(seed);
   const correctAnswers = puzzles.map(p => p.correctOptionIndex);
   const result = computeScore(answers, correctAnswers);
 
-  const subtitle = typeParam === 'matrix' ? TYPE_NAMES.matrix : undefined;
+  const subtitle = testType === 'matrix' ? TYPE_NAMES.matrix : undefined;
   return renderScoreImage(result.iq, result.percentile, result.classification, subtitle);
 }

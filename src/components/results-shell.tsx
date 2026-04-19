@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense, useMemo, useState } from 'react';
+import React, { Suspense, useMemo, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { decodeSeed } from '@/lib/prng';
@@ -42,10 +42,13 @@ function ResultsShellContent({
   const searchParams = useSearchParams();
   const [copied, setCopied] = useState(false);
   const [challengeCopied, setChallengeCopied] = useState(false);
+  const [verifyState, setVerifyState] = useState<'pending' | 'valid' | 'invalid'>('pending');
 
   const seedParam = searchParams.get('s');
   const answersParam = searchParams.get('a');
   const timeParam = searchParams.get('t');
+  const completedAtParam = searchParams.get('ct');
+  const signatureParam = searchParams.get('sig');
 
   const seed = seedParam ? decodeSeed(seedParam) : 0;
   const userAnswers = answersParam ? decodeAnswers(answersParam) : [];
@@ -62,6 +65,37 @@ function ResultsShellContent({
     return computeScore(userAnswers, correctAnswers);
   }, [seed, seedParam, answersParam, userAnswers, generateQuestion, totalQuestions]);
 
+  // Fix 2: verify HMAC signature on mount. Fail-closed: network errors and
+  // missing params all collapse to 'invalid'.
+  useEffect(() => {
+    if (!seedParam || !answersParam || !completedAtParam || !signatureParam) {
+      setVerifyState('invalid');
+      return;
+    }
+    let cancelled = false;
+    (async () => {
+      try {
+        const url = new URL('/api/verify', window.location.origin);
+        url.searchParams.set('s', seedParam);
+        url.searchParams.set('a', answersParam);
+        url.searchParams.set('t', testSlug);
+        url.searchParams.set('ct', completedAtParam);
+        url.searchParams.set('sig', signatureParam);
+        const res = await fetch(url.toString());
+        if (cancelled) return;
+        if (!res.ok) {
+          setVerifyState('invalid');
+          return;
+        }
+        const data = await res.json();
+        setVerifyState(data?.valid ? 'valid' : 'invalid');
+      } catch {
+        if (!cancelled) setVerifyState('invalid');
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [seedParam, answersParam, completedAtParam, signatureParam, testSlug]);
+
   if (!result) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
@@ -76,6 +110,33 @@ function ResultsShellContent({
             Choose a Test
           </Link>
         </div>
+      </div>
+    );
+  }
+
+  if (verifyState === 'pending') {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <p className="text-sm text-muted">Verifying result...</p>
+      </div>
+    );
+  }
+
+  if (verifyState === 'invalid') {
+    return (
+      <div className="max-w-xl mx-auto px-4 py-16 text-center">
+        <h1 className="text-xl font-semibold mb-3">This result link is invalid or has been modified</h1>
+        <p className="text-sm text-muted mb-6">
+          We couldn&apos;t verify this result. Links created before signed results were introduced,
+          or links whose parameters have been edited, will show this message. Take the test to get a
+          fresh, shareable link.
+        </p>
+        <Link
+          href={`/test/${testSlug}`}
+          className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
+        >
+          Take the {testName} test
+        </Link>
       </div>
     );
   }

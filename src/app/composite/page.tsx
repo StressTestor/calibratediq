@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense, useMemo, useState } from 'react';
+import React, { Suspense, useMemo, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { decodeSeed } from '@/lib/prng';
@@ -15,6 +15,7 @@ import {
   COMPOSITE_LABELS,
   COMPOSITE_WEIGHTS,
   MIN_TESTS_FOR_COMPOSITE,
+  type CompositeTestParams,
 } from '@/lib/tests/composite';
 import { loadResults, clearResults } from '@/lib/results-store';
 import { ClearHistoryDialog } from '@/components/clear-history-dialog';
@@ -53,18 +54,23 @@ function CompositeContent() {
 
   // Source selection: URL params (shared-link case) take precedence over localStorage.
   // If URL has no test params, fall back to local results.
-  const parsed = useMemo(() => {
+  const parsed = useMemo<Record<TestSlug, CompositeTestParams | null>>(() => {
     const fromUrl = parseCompositeParams(searchParams);
     const hasAnyUrlParam = TEST_SLUGS.some((s) => fromUrl[s] !== null);
     if (hasAnyUrlParam) return fromUrl;
 
     const local = loadResults();
-    const result: Record<TestSlug, { seed: string; answers: string } | null> = {
+    const result: Record<TestSlug, CompositeTestParams | null> = {
       matrix: null, spatial: null, numerical: null,
       logical: null, verbal: null, memory: null,
     };
     for (const rec of local) {
-      result[rec.testType as TestSlug] = { seed: rec.seed, answers: rec.answers };
+      result[rec.testType as TestSlug] = {
+        seed: rec.seed,
+        answers: rec.answers,
+        completedAt: rec.completedAt,
+        signature: rec.signature,
+      };
     }
     return result;
   }, [searchParams]);
@@ -75,6 +81,44 @@ function CompositeContent() {
     return !urlHasAny && loadResults().length > 0;
   }, [searchParams]);
 
+  // Fix 2: verify each test's signature. Only verified slugs count toward the composite.
+  const [verifiedSlugs, setVerifiedSlugs] = useState<Set<TestSlug>>(new Set());
+  const [verificationDone, setVerificationDone] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    setVerificationDone(false);
+    (async () => {
+      const next = new Set<TestSlug>();
+      await Promise.all(
+        TEST_SLUGS.map(async (slug) => {
+          const data = parsed[slug];
+          if (!data || !data.signature) return; // empty sig never verifies
+          try {
+            const url = new URL('/api/verify', window.location.origin);
+            url.searchParams.set('s', data.seed);
+            url.searchParams.set('a', data.answers);
+            url.searchParams.set('t', slug);
+            url.searchParams.set('ct', data.completedAt);
+            url.searchParams.set('sig', data.signature);
+            const res = await fetch(url.toString());
+            if (res.ok) {
+              const j = await res.json();
+              if (j?.valid) next.add(slug);
+            }
+          } catch {
+            // network error → unverified (fail-closed)
+          }
+        })
+      );
+      if (!cancelled) {
+        setVerifiedSlugs(next);
+        setVerificationDone(true);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [parsed]);
+
   function handleClearConfirm() {
     clearResults();
     setConfirmClearOpen(false);
@@ -84,11 +128,12 @@ function CompositeContent() {
     }
   }
 
-  // Compute individual IQ scores for each completed test
+  // Compute individual IQ scores for each completed AND verified test.
   const testIQs = useMemo(() => {
     const result: Partial<Record<TestSlug, number>> = {};
 
     for (const slug of TEST_SLUGS) {
+      if (!verifiedSlugs.has(slug)) continue;
       const data = parsed[slug];
       if (!data) continue;
 
@@ -108,7 +153,7 @@ function CompositeContent() {
     }
 
     return result;
-  }, [parsed]);
+  }, [parsed, verifiedSlugs]);
 
   const completedSlugs = TEST_SLUGS.filter((s) => testIQs[s] !== undefined);
   const incompleteSlugs = TEST_SLUGS.filter((s) => testIQs[s] === undefined);
@@ -129,6 +174,16 @@ function CompositeContent() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
+  }
+
+  // Fix 2: while verification is in flight, show spinner rather than briefly
+  // rendering the not-enough-tests state with stale counts.
+  if (!verificationDone) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <p className="text-sm text-muted">Verifying results...</p>
+      </div>
+    );
   }
 
   // Not enough tests
