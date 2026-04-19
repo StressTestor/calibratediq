@@ -49,7 +49,7 @@ export default function RavensProgressiveMatricesPage() {
           {/* Main content */}
           <article className="flex-1 max-w-2xl">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-              Raven&apos;s Progressive Matrices — the gold standard IQ test
+              Raven&apos;s Progressive Matrices. The Gold Standard IQ Test
             </h1>
 
             {/* Introduction */}
@@ -66,7 +66,7 @@ export default function RavensProgressiveMatricesPage() {
                   Its enduring popularity stems from a combination of psychometric strength
                   and practical simplicity. The test requires no language, no cultural
                   knowledge, and no formal education to attempt. It measures pure reasoning
-                  ability — the capacity to perceive patterns, infer rules, and apply logic
+                  ability: the capacity to perceive patterns, infer rules, and apply logic
                   to novel visual problems. This makes it one of the strongest available
                   measures of{' '}
                   <Link
@@ -91,17 +91,17 @@ export default function RavensProgressiveMatricesPage() {
             {/* CTA 1 */}
             <div className="mb-10 text-center">
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Take a free RPM-based assessment
+                Take a Free RPM-Based Assessment
               </Link>
             </div>
 
             {/* History */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                history and origins
+                History and Origins
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -153,7 +153,7 @@ export default function RavensProgressiveMatricesPage() {
             {/* How it works */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                how the test works
+                How the Test Works
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -170,7 +170,7 @@ export default function RavensProgressiveMatricesPage() {
                   as the test proceeds. Early items may involve a single, straightforward
                   rule (such as a shape that rotates 90 degrees in each cell). Later items
                   involve multiple simultaneous rules that must be identified and applied
-                  together — for example, a shape that both rotates and changes color
+                  together. For example, a shape that both rotates and changes color
                   while a separate element follows an independent numerical progression.
                 </p>
                 <p>
@@ -191,11 +191,11 @@ export default function RavensProgressiveMatricesPage() {
             {/* Three versions */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                the three versions
+                The Three Versions
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <h3 className="text-sm font-semibold text-text dark:text-text-dark mt-4">
-                  standard progressive matrices (SPM)
+                  Standard Progressive Matrices (SPM)
                 </h3>
                 <p>
                   The original version, containing 60 items organized in five sets of 12
@@ -206,7 +206,7 @@ export default function RavensProgressiveMatricesPage() {
                 </p>
 
                 <h3 className="text-sm font-semibold text-text dark:text-text-dark mt-4">
-                  coloured progressive matrices (CPM)
+                  Coloured Progressive Matrices (CPM)
                 </h3>
                 <p>
                   A simplified version designed for young children (ages 5 to 11), elderly
@@ -217,7 +217,7 @@ export default function RavensProgressiveMatricesPage() {
                 </p>
 
                 <h3 className="text-sm font-semibold text-text dark:text-text-dark mt-4">
-                  advanced progressive matrices (APM)
+                  Advanced Progressive Matrices (APM)
                 </h3>
                 <p>
                   A more difficult version designed for individuals of above-average ability,
@@ -233,7 +233,7 @@ export default function RavensProgressiveMatricesPage() {
             {/* Culture-fairness */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                why it is considered culture-fair
+                Why It Is Considered Culture-Fair
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -272,7 +272,7 @@ export default function RavensProgressiveMatricesPage() {
             {/* Relationship to g */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                relationship to Spearman&apos;s g factor
+                Relationship to Spearman&apos;s g Factor
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -306,7 +306,7 @@ export default function RavensProgressiveMatricesPage() {
             {/* Use in research and clinical settings */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                use in research and clinical settings
+                Use in Research and Clinical Settings
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -321,8 +321,8 @@ export default function RavensProgressiveMatricesPage() {
                     className="underline hover:text-text dark:hover:text-text-dark transition-colors"
                   >
                     Flynn effect
-                  </a>{' '}
-                  — the observed rise in IQ scores over generations — was first documented
+                  </a>
+                  , the observed rise in IQ scores over generations, was first documented
                   using RPM data, among other tests.
                 </p>
                 <p>
@@ -354,16 +354,16 @@ export default function RavensProgressiveMatricesPage() {
                 Progressive Matrices to estimate your fluid intelligence score.
               </p>
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Take the free assessment
+                Take a Free Assessment
               </Link>
             </div>
 
             {/* References */}
             <section>
-              <h2 className="text-lg font-semibold mb-3">references</h2>
+              <h2 className="text-lg font-semibold mb-3">References</h2>
               <ul className="space-y-2 text-sm text-muted">
                 <li>
                   <a

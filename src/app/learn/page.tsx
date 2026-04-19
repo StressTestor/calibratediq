@@ -18,53 +18,53 @@ export const metadata: Metadata = {
 const articles = [
   {
     href: '/learn/what-is-iq',
-    title: 'what is IQ?',
-    desc: 'The history and meaning of the intelligence quotient, from Binet to modern testing.',
+    title: 'What Is IQ?',
+    desc: 'The history and meaning of the intelligence quotient, from Binet to modern psychometric testing.',
   },
   {
     href: '/learn/iq-scale',
-    title: 'IQ scale and score chart',
+    title: 'IQ Scale and Score Chart',
     desc: 'What each IQ range means, with percentiles, classifications, and rarity statistics.',
   },
   {
     href: '/learn/fluid-vs-crystallized-intelligence',
-    title: 'fluid vs crystallized intelligence',
-    desc: 'Two types of cognitive ability, how they change with age, and why matrix tests measure one over the other.',
+    title: 'Fluid vs Crystallized Intelligence',
+    desc: 'Two components of cognitive ability, how they change with age, and which domains measure which.',
   },
   {
     href: '/learn/ravens-progressive-matrices',
     title: "Raven's Progressive Matrices",
-    desc: 'The gold standard culture-fair IQ test, created in 1936 and still used worldwide.',
+    desc: 'The gold-standard culture-fair intelligence test, created in 1936 and still used worldwide.',
   },
   {
     href: '/learn/how-iq-is-calculated',
-    title: 'how IQ scores are calculated',
+    title: 'How IQ Scores Are Calculated',
     desc: 'The math behind the number: normal distributions, z-scores, percentiles, and the Flynn effect.',
   },
   {
     href: '/learn/iq-percentile-calculator',
-    title: 'IQ percentile calculator',
-    desc: 'Enter any IQ score and instantly see your percentile rank, classification, and bell curve position.',
+    title: 'IQ Percentile Calculator',
+    desc: 'Enter any IQ score to see the percentile rank, classification, and position on the bell curve.',
   },
   {
     href: '/learn/mensa-iq-score',
-    title: 'what IQ do you need for Mensa?',
-    desc: 'Mensa requirements, accepted tests, how to join, and what the test is actually like.',
+    title: 'IQ Requirements for Mensa',
+    desc: 'Mensa entry criteria, accepted tests, the application process, and what the proctored test is like.',
   },
   {
     href: '/learn/average-iq',
-    title: 'average IQ scores',
-    desc: 'How IQ varies by age and population, the Flynn effect, and why cross-country comparisons are misleading.',
+    title: 'Average IQ Scores',
+    desc: 'How IQ varies by age and population, the Flynn effect, and why cross-country comparisons mislead.',
   },
   {
     href: '/learn/is-iq-genetic',
-    title: 'is IQ genetic?',
-    desc: 'Twin studies, heritability estimates, environmental factors, and why nature vs nurture is the wrong framing.',
+    title: 'Is IQ Genetic?',
+    desc: 'Twin studies, heritability estimates, environmental factors, and why nature-versus-nurture is the wrong framing.',
   },
   {
     href: '/learn/iq-test-accuracy',
-    title: 'are online IQ tests accurate?',
-    desc: 'What makes a good test vs a bad one, and how to evaluate whether your score means anything.',
+    title: 'Are Online IQ Tests Accurate?',
+    desc: 'What separates a reliable test from a novelty one, and how to evaluate whether a given score means anything.',
   },
 ];
 
@@ -105,18 +105,18 @@ export default function LearnPage() {
       />
 
       <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
-        learn about IQ testing
+        Learn About IQ Testing
       </h1>
-      <p className="text-sm text-muted mb-6">
-        Free guides on intelligence testing, scoring methodology, and cognitive
-        science.
+      <p className="text-sm text-muted mb-6 max-w-2xl">
+        Reference material on intelligence testing, scoring methodology, and
+        the research behind each cognitive domain.
       </p>
 
       <Link
-        href="/test"
-        className="inline-block px-5 py-2.5 text-sm font-medium bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors mb-10"
+        href="/tests"
+        className="inline-block px-5 py-2.5 text-sm font-medium bg-primary text-white rounded-lg hover:bg-primary-light transition-colors mb-10"
       >
-        Take the test
+        Take a Test
       </Link>
 
       {/* First 5 cards */}

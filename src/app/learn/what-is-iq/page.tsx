@@ -43,7 +43,7 @@ export default function WhatIsIQPage() {
           {/* Main content */}
           <article className="flex-1 max-w-2xl">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-              what is IQ? understanding the intelligence quotient
+              What Is IQ? Understanding the Intelligence Quotient
             </h1>
 
             {/* Introduction */}
@@ -68,17 +68,17 @@ export default function WhatIsIQPage() {
             {/* CTA 1 */}
             <div className="mb-10 text-center">
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Find out yours — take the test
+                Find Out Yours
               </Link>
             </div>
 
             {/* History */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                a brief history of IQ testing
+                A Brief History of IQ Testing
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -149,7 +149,7 @@ export default function WhatIsIQPage() {
             {/* What IQ measures */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                what IQ measures
+                What IQ Measures
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -183,7 +183,7 @@ export default function WhatIsIQPage() {
                   >
                     fluid intelligence
                   </Link>{' '}
-                  — the capacity to reason through novel problems without relying on prior
+                  , the capacity to reason through novel problems without relying on prior
                   knowledge. Others, like the WAIS, measure a broader composite including both
                   fluid and crystallized intelligence.
                 </p>
@@ -193,7 +193,7 @@ export default function WhatIsIQPage() {
             {/* The normal distribution */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                the normal distribution
+                The Normal Distribution
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -239,7 +239,7 @@ export default function WhatIsIQPage() {
             {/* What IQ does not measure */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                what IQ does not measure
+                What IQ Does Not Measure
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -279,7 +279,7 @@ export default function WhatIsIQPage() {
             {/* Common misconceptions */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                common misconceptions
+                Common Misconceptions
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -320,16 +320,16 @@ export default function WhatIsIQPage() {
                 to estimate your fluid intelligence score.
               </p>
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Take the free IQ test
+                Take a Free IQ Test
               </Link>
             </div>
 
             {/* References */}
             <section>
-              <h2 className="text-lg font-semibold mb-3">references</h2>
+              <h2 className="text-lg font-semibold mb-3">References</h2>
               <ul className="space-y-2 text-sm text-muted">
                 <li>
                   <a

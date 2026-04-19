@@ -43,7 +43,7 @@ export default function MensaIQScorePage() {
           {/* Main content */}
           <article className="flex-1 max-w-2xl">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-              what IQ score do you need for Mensa?
+              What IQ Score Do You Need for Mensa?
             </h1>
 
             {/* Introduction */}
@@ -60,7 +60,7 @@ export default function MensaIQScorePage() {
                   The name &quot;Mensa&quot; is Latin for &quot;table,&quot; reflecting the
                   organization&apos;s founding principle of a round-table society where all members
                   meet as equals regardless of background, age, or profession. Membership is based
-                  exclusively on cognitive test performance — no other criteria apply.
+                  exclusively on cognitive test performance; no other criteria apply.
                 </p>
               </div>
             </section>
@@ -68,17 +68,17 @@ export default function MensaIQScorePage() {
             {/* CTA 1 */}
             <div className="mb-10 text-center">
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Practice with a free Mensa-style test
+                Practice with a Free Mensa-Style Test
               </Link>
             </div>
 
             {/* The requirement */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                the 98th percentile requirement
+                The 98th Percentile Requirement
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -103,7 +103,7 @@ export default function MensaIQScorePage() {
                 <p>
                   The critical point is that the requirement is always the top 2% of the population,
                   regardless of the numerical score. A score of 148 on the Cattell is equivalent to
-                  130 on the Wechsler — both represent the same position on the distribution. For
+                  130 on the Wechsler; both represent the same position on the distribution. For
                   a full breakdown of how different scoring scales compare, see the{' '}
                   <Link
                     href="/learn/iq-scale"
@@ -123,7 +123,7 @@ export default function MensaIQScorePage() {
             {/* Accepted tests */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                which tests does Mensa accept?
+                Which Tests Does Mensa Accept?
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -159,14 +159,14 @@ export default function MensaIQScorePage() {
             {/* How to join */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                how to join Mensa
+                How to Join Mensa
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
                   There are two pathways to Mensa membership:
                 </p>
                 <h3 className="text-sm font-semibold mt-4 mb-2 text-text dark:text-text-dark">
-                  1. submit prior qualifying scores
+                  1. Submit Prior Qualifying Scores
                 </h3>
                 <p>
                   If you have already taken an approved standardized intelligence test and scored at
@@ -175,13 +175,13 @@ export default function MensaIQScorePage() {
                   professional, and the score before granting membership.
                 </p>
                 <h3 className="text-sm font-semibold mt-4 mb-2 text-text dark:text-text-dark">
-                  2. take the Mensa admissions test
+                  2. Take the Mensa Admissions Test
                 </h3>
                 <p>
                   Most national Mensa chapters offer their own supervised admissions test. In the
                   United States, American Mensa administers a test battery at proctored sessions held
                   at various locations throughout the year. The test fee is typically around $40-60
-                  USD. The battery generally consists of two tests — one culture-fair (non-verbal,
+                  USD. The battery generally consists of two tests: one culture-fair (non-verbal,
                   pattern-based) and one verbal or general reasoning assessment. Qualifying on either
                   test is sufficient for admission.
                 </p>
@@ -195,14 +195,14 @@ export default function MensaIQScorePage() {
             {/* What the test is like */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                what the Mensa admissions test is like
+                What the Mensa Admissions Test Is Like
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
                   The specific content of the Mensa admissions test varies by country, but most
                   versions share common characteristics. The tests are timed, typically lasting
                   20-40 minutes each. Questions are multiple-choice. No specialized knowledge is
-                  required — the tests measure reasoning ability, not learned information.
+                  required; the tests measure reasoning ability, not learned information.
                 </p>
                 <p>
                   The culture-fair component usually consists of non-verbal pattern recognition tasks
@@ -237,7 +237,7 @@ export default function MensaIQScorePage() {
             {/* Common misconceptions */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                common misconceptions about Mensa
+                Common Misconceptions About Mensa
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -257,7 +257,7 @@ export default function MensaIQScorePage() {
                 <p>
                   <strong>&quot;You can use an online IQ test to get into Mensa.&quot;</strong> No
                   online test is accepted for Mensa membership. All qualifying scores must come from
-                  supervised, professionally administered tests. Online tests — including ours — can
+                  supervised, professionally administered tests. Online tests, including ours, can
                   serve as useful practice tools to gauge whether you are likely to qualify, but they
                   are not substitutes for the official admissions process.
                 </p>
@@ -274,7 +274,7 @@ export default function MensaIQScorePage() {
             {/* Practice tests vs official tests */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                practice tests vs official tests
+                Practice Tests vs Official Tests
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -291,7 +291,7 @@ export default function MensaIQScorePage() {
                 </p>
                 <p>
                   If you score at or above 130 on a well-designed practice test, you have a
-                  reasonable chance of qualifying on the official Mensa admissions test — but it
+                  reasonable chance of qualifying on the official Mensa admissions test, but it
                   is not guaranteed. Conversely, scoring slightly below 130 on a practice test does
                   not mean you will fail the official test. Use the{' '}
                   <Link
@@ -312,16 +312,16 @@ export default function MensaIQScorePage() {
                 problems found on the Mensa admissions test.
               </p>
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Try a free Mensa-style practice test
+                Try a Free Mensa-Style Practice Test
               </Link>
             </div>
 
             {/* References */}
             <section>
-              <h2 className="text-lg font-semibold mb-3">references</h2>
+              <h2 className="text-lg font-semibold mb-3">References</h2>
               <ul className="space-y-2 text-sm text-muted">
                 <li>
                   <a

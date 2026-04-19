@@ -2,13 +2,13 @@ import type { Metadata } from 'next';
 import { AdPlaceholder } from '@/components/ad-placeholder';
 
 export const metadata: Metadata = {
-  title: 'How IQ Testing Works — Raven\'s Progressive Matrices Explained',
+  title: 'About CalibratedIQ',
   description:
-    'Learn how IQ tests work and how Raven\'s Progressive Matrices measures fluid intelligence. Understand IQ scoring, percentile ranks, classifications, and what your score means.',
+    'CalibratedIQ offers six cognitive domain tests on a normal-distribution IQ scale. Learn how scoring works, what the classifications mean, and the limitations of any online IQ test.',
   openGraph: {
-    title: 'How IQ Testing Works — Raven\'s Progressive Matrices Explained | CalibratedIQ',
+    title: 'About CalibratedIQ',
     description:
-      'Learn how Raven\'s Progressive Matrices measures fluid intelligence, how IQ scoring works, and what your score means.',
+      'How CalibratedIQ scores its six cognitive domain tests, what the classifications mean, and where the methodology comes from.',
     url: 'https://calibratediq.org/about',
   },
   alternates: {
@@ -34,57 +34,76 @@ export default function AboutPage() {
         {/* Main content */}
         <div className="flex-1 max-w-2xl">
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-            About the test
+            About CalibratedIQ
           </h1>
 
-          {/* Raven's Progressive Matrices */}
+          {/* What this is */}
+          <section className="mb-10">
+            <h2 className="text-lg font-semibold mb-3">What This Is</h2>
+            <div className="space-y-3 text-sm leading-relaxed text-muted">
+              <p>
+                CalibratedIQ is an independent project that offers six
+                cognitive domain tests, each scored on the standard
+                normal-distribution IQ scale (mean 100, standard deviation 15).
+                Completing three or more tests produces a weighted composite
+                IQ and a radar chart of your cognitive profile.
+              </p>
+              <p>
+                The project exists because most free online IQ tests either
+                require an email to see your score, rely on trivia questions
+                unrelated to established psychometrics, or both. Every test
+                here runs entirely in your browser, stores results in local
+                storage only, and reports scores using the same scale used in
+                standardized clinical assessment.
+              </p>
+            </div>
+          </section>
+
+          {/* Cognitive domains covered */}
           <section className="mb-10">
             <h2 className="text-lg font-semibold mb-3">
-              Raven&apos;s Progressive Matrices
+              Cognitive Domains Measured
             </h2>
             <div className="space-y-3 text-sm leading-relaxed text-muted">
               <p>
-                Raven&apos;s Progressive Matrices (RPM) is a nonverbal
-                intelligence test originally designed by John C. Raven in
-                1936. It is widely regarded as one of the purest measures of
-                fluid intelligence (gf), the ability to reason and solve
-                novel problems independent of previously acquired knowledge.
+                Six tests cover distinct facets of general intelligence (g):
+                pattern recognition (Raven-style progressive matrices),
+                spatial reasoning, number sequences, logical reasoning,
+                verbal reasoning, and working memory. Each test is 30
+                questions drawn from a seeded procedural generator, so the
+                same seed always produces the same test.
               </p>
               <p>
-                The test presents a series of visual patterns arranged in a
-                matrix, with one element missing. The test-taker must
-                identify the underlying rules governing the pattern
-                (rotation, color progression, shape transformation, etc.)
-                and select the correct missing piece from a set of options.
-              </p>
-              <p>
-                Because RPM relies on abstract geometric patterns rather
-                than language or cultural knowledge, it is considered one of
-                the most culture-fair intelligence tests available. It has
-                been used extensively in research and clinical settings for
-                over 80 years.
+                Pattern recognition uses matrices modeled on John C.
+                Raven&apos;s Progressive Matrices (1936), widely regarded as
+                one of the purest measures of fluid intelligence (gf) because
+                it relies on abstract geometric patterns rather than language
+                or cultural knowledge.
               </p>
             </div>
           </section>
 
           {/* How scoring works */}
           <section className="mb-10">
-            <h2 className="text-lg font-semibold mb-3">
-              How scoring works
-            </h2>
+            <h2 className="text-lg font-semibold mb-3">How Scoring Works</h2>
             <div className="space-y-3 text-sm leading-relaxed text-muted">
               <p>
-                Raw scores (number of correct answers out of 30) are mapped
-                onto a normal distribution with a mean of 100 and a standard
-                deviation of 15, which is the standard scale used in IQ
-                testing (the Wechsler scale).
+                Raw scores (number correct out of 30) are mapped onto a normal
+                distribution with a mean of 100 and a standard deviation of
+                15, the scale used by the Wechsler Adult Intelligence Scale
+                and most modern IQ instruments.
               </p>
               <p>
-                This means approximately 68% of scores fall between 85 and
-                115, approximately 95% fall between 70 and 130, and
-                approximately 99.7% fall between 55 and 145. Your
-                percentile rank indicates the percentage of the general
-                population you would be expected to score higher than.
+                On this scale, roughly 68% of scores fall between 85 and 115,
+                95% fall between 70 and 130, and 99.7% fall between 55 and
+                145. The percentile rank indicates the proportion of the
+                general population a given score would be expected to exceed.
+              </p>
+              <p>
+                The composite IQ is computed as a weighted average of the
+                individual domain scores, with weights reflecting each
+                domain&apos;s contribution to general intelligence as
+                reported in the psychometric literature.
               </p>
             </div>
           </section>
@@ -92,7 +111,7 @@ export default function AboutPage() {
           {/* Classifications */}
           <section className="mb-10">
             <h2 className="text-lg font-semibold mb-3">
-              What IQ scores mean
+              IQ Classifications
             </h2>
             <div className="border border-border dark:border-border-dark rounded-lg overflow-hidden">
               <table className="w-full text-sm">
@@ -134,23 +153,21 @@ export default function AboutPage() {
             <h2 className="text-lg font-semibold mb-3">Limitations</h2>
             <div className="space-y-3 text-sm leading-relaxed text-muted">
               <p>
-                This is a screening tool, not a clinical assessment.
-                Results from this test should be interpreted as an
-                approximation and should not be used for diagnostic,
-                educational, or employment decisions.
+                CalibratedIQ is a screening tool, not a clinical instrument.
+                Scores should be read as approximations and are not
+                appropriate for diagnostic, educational, or employment
+                decisions.
               </p>
               <p>
-                Several factors can affect your score: fatigue,
-                distraction, test anxiety, familiarity with matrix-style
-                puzzles, and the testing environment. A single online test
-                cannot account for these variables with the same rigor as a
-                proctored clinical assessment.
+                Fatigue, distraction, test anxiety, familiarity with the item
+                format, and environmental variables all affect performance.
+                No online instrument can match the rigor of a proctored
+                clinical assessment administered by a licensed psychologist.
               </p>
               <p>
-                For a clinical assessment of cognitive ability, consult a
-                licensed psychologist who can administer a standardized test
-                battery (such as the WAIS-IV or Stanford-Binet) under
-                controlled conditions.
+                For a full clinical evaluation of cognitive ability, seek a
+                psychologist who can administer a standardized battery such
+                as the WAIS-IV or Stanford-Binet under controlled conditions.
               </p>
             </div>
           </section>

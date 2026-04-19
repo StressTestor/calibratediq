@@ -44,7 +44,7 @@ export default function IQPercentileCalculatorPage() {
           {/* Main content */}
           <article className="flex-1 max-w-2xl">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-              IQ percentile calculator — find your ranking
+              IQ Percentile Calculator: Find Your Ranking
             </h1>
 
             {/* Introduction */}
@@ -54,7 +54,7 @@ export default function IQPercentileCalculatorPage() {
                   An IQ score on its own is a number. What gives that number meaning is its position
                   relative to the rest of the population. Percentiles provide this context: they tell
                   you the percentage of people who scored at or below a given value. If you are in
-                  the 85th percentile, 85% of the norming population scored at or below your level.
+                  the 85th percentile, 85 percent of the norming population scored at or below your level.
                 </p>
                 <p>
                   Use the calculator below to convert any IQ score into its corresponding percentile,
@@ -86,23 +86,23 @@ export default function IQPercentileCalculatorPage() {
                 estimate your fluid intelligence score and place you on the distribution.
               </p>
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Get your real percentile — take the test
+                Get Your Real Percentile
               </Link>
             </div>
 
             {/* What percentiles mean */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                what percentiles mean
+                What Percentiles Mean
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
                   A percentile is a statistical measure indicating the value below which a given
                   percentage of observations fall. In the context of IQ testing, the 50th percentile
-                  corresponds to an IQ of exactly 100 — the population mean. Half of all test-takers
+                  corresponds to an IQ of exactly 100, the population mean. Half of all test-takers
                   score above this point, and half score below.
                 </p>
                 <p>
@@ -128,7 +128,7 @@ export default function IQPercentileCalculatorPage() {
             {/* Non-linear relationship */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                the non-linear relationship between IQ and percentile
+                The Non-Linear Relationship Between IQ and Percentile
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -136,12 +136,12 @@ export default function IQPercentileCalculatorPage() {
                   is non-linear, especially at the tails of the distribution. Near the center of the
                   bell curve, where most people cluster, small changes in IQ correspond to large
                   changes in percentile. Moving from IQ 100 to IQ 105 shifts you from the 50th
-                  percentile to roughly the 63rd — a jump of 13 percentile points from just 5 IQ
+                  percentile to roughly the 63rd, a jump of 13 percentile points from just 5 IQ
                   points.
                 </p>
                 <p>
                   At the extremes, the opposite occurs. Moving from IQ 135 to IQ 140 shifts you
-                  from approximately the 99.0th percentile to the 99.6th — a difference of only
+                  from approximately the 99.0th percentile to the 99.6th, a difference of only
                   0.6 percentile points for the same 5-point IQ increase. This is because the{' '}
                   <a
                     href="https://en.wikipedia.org/wiki/Normal_distribution"
@@ -172,7 +172,7 @@ export default function IQPercentileCalculatorPage() {
             {/* How percentiles are calculated */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                how percentiles are calculated
+                How Percentiles Are Calculated
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -194,7 +194,7 @@ export default function IQPercentileCalculatorPage() {
                 <p>
                   For example, an IQ of 115 yields a z-score of 1.0. The CDF at z = 1.0 is
                   approximately 0.8413, so an IQ of 115 falls at the 84th percentile. An IQ of 130
-                  yields z = 2.0, and the CDF gives approximately 0.9772 — the 98th percentile.
+                  yields z = 2.0, and the CDF gives approximately 0.9772, the 98th percentile.
                   For a deeper exploration of the mathematics, see{' '}
                   <Link
                     href="/learn/how-iq-is-calculated"
@@ -209,7 +209,7 @@ export default function IQPercentileCalculatorPage() {
             {/* Practical significance */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                practical significance of percentile rankings
+                Practical Significance of Percentile Rankings
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -251,7 +251,7 @@ export default function IQPercentileCalculatorPage() {
             {/* Common percentile reference table */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                IQ to percentile reference table
+                IQ to Percentile Reference Table
               </h2>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left border-collapse">
@@ -305,16 +305,16 @@ export default function IQPercentileCalculatorPage() {
                 Find out where you really fall on the curve.
               </p>
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Take the free IQ test
+                Take a Free IQ Test
               </Link>
             </div>
 
             {/* References */}
             <section>
-              <h2 className="text-lg font-semibold mb-3">references</h2>
+              <h2 className="text-lg font-semibold mb-3">References</h2>
               <ul className="space-y-2 text-sm text-muted">
                 <li>
                   <a

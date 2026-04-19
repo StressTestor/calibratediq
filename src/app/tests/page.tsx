@@ -5,16 +5,16 @@ import { TEST_SLUGS, TestSlug } from '@/lib/tests/types';
 import { AdPlaceholder } from '@/components/ad-placeholder';
 
 export const metadata: Metadata = {
-  title: 'Choose Your Test',
+  title: 'All Six IQ Tests',
   description:
-    '6 scientifically-grounded cognitive assessments: pattern recognition, spatial reasoning, number sequences, logical reasoning, verbal reasoning, and working memory.',
+    'Six cognitive domain tests on CalibratedIQ: pattern recognition, spatial reasoning, number sequences, logical reasoning, verbal reasoning, and working memory. 30 questions each, scored on a normal-distribution IQ scale.',
   alternates: {
     canonical: 'https://calibratediq.org/tests',
   },
   openGraph: {
-    title: 'Choose Your Test - CalibratedIQ',
+    title: 'All Six IQ Tests - CalibratedIQ',
     description:
-      '6 scientifically-grounded cognitive assessments measuring different facets of intelligence.',
+      'Six cognitive domain tests, each scored on a normal-distribution IQ scale.',
     url: 'https://calibratediq.org/tests',
   },
 };
@@ -77,10 +77,11 @@ export default function TestsPage() {
       {/* Header */}
       <div className="text-center mb-10">
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
-          choose your test
+          Choose Your Test
         </h1>
-        <p className="text-sm text-muted">
-          6 scientifically-grounded cognitive assessments
+        <p className="text-sm text-muted max-w-xl mx-auto">
+          Six cognitive domain tests, each scored on a normal-distribution IQ
+          scale. Complete three or more for a weighted composite.
         </p>
       </div>
 
@@ -174,9 +175,17 @@ export default function TestsPage() {
 
       {/* Composite CTA */}
       <div className="text-center border border-border dark:border-border-dark rounded-lg p-6 mb-8">
-        <p className="text-sm text-muted">
-          Complete 3 or more tests to get your composite IQ score
+        <h2 className="text-base font-semibold mb-1.5">Composite IQ Score</h2>
+        <p className="text-sm text-muted mb-3 leading-relaxed max-w-xl mx-auto">
+          After three or more completed tests, your domain scores are weighted
+          into a single composite IQ.
         </p>
+        <Link
+          href="/composite"
+          className="inline-flex items-center text-sm font-medium text-primary dark:text-primary-light hover:underline"
+        >
+          View Composite Score &rarr;
+        </Link>
       </div>
 
       {/* Bottom ad */}

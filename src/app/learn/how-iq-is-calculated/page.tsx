@@ -69,7 +69,7 @@ export default function HowIQIsCalculatedPage() {
           {/* Main content */}
           <article className="flex-1 max-w-2xl">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-              how IQ scores are calculated — the math behind the number
+              How IQ Scores Are Calculated. The Math Behind the Number
             </h1>
 
             {/* Introduction */}
@@ -102,17 +102,17 @@ export default function HowIQIsCalculatedPage() {
             {/* CTA 1 */}
             <div className="mb-10 text-center">
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                See your score calculated live — take the test
+                See Your Score Calculated Live
               </Link>
             </div>
 
             {/* Raw scores vs standard scores */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                raw scores vs standard scores
+                Raw Scores vs Standard Scores
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -144,7 +144,7 @@ export default function HowIQIsCalculatedPage() {
             {/* The normal distribution */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                the normal distribution
+                The Normal Distribution
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -192,7 +192,7 @@ export default function HowIQIsCalculatedPage() {
             {/* The formula */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                the formula: from raw score to IQ
+                The Formula: From Raw Score to IQ
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -230,7 +230,7 @@ export default function HowIQIsCalculatedPage() {
             {/* Percentile ranks from z-scores */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                percentile ranks from z-scores
+                Percentile Ranks From z-Scores
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted mb-6">
                 <p>
@@ -274,7 +274,7 @@ export default function HowIQIsCalculatedPage() {
             {/* Ceiling and floor effects */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                ceiling and floor effects
+                Ceiling and Floor Effects
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -311,7 +311,7 @@ export default function HowIQIsCalculatedPage() {
             {/* Why different tests give different scores */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                why different tests give different scores
+                Why Different Tests Give Different Scores
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -353,7 +353,7 @@ export default function HowIQIsCalculatedPage() {
             {/* The Flynn effect */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                the Flynn effect
+                The Flynn Effect
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -406,16 +406,16 @@ export default function HowIQIsCalculatedPage() {
                 convert your matrix reasoning performance into a calibrated IQ estimate.
               </p>
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Take the free IQ test
+                Take a Free IQ Test
               </Link>
             </div>
 
             {/* References */}
             <section>
-              <h2 className="text-lg font-semibold mb-3">references</h2>
+              <h2 className="text-lg font-semibold mb-3">References</h2>
               <ul className="space-y-2 text-sm text-muted">
                 <li>
                   <a

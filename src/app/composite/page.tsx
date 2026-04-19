@@ -165,7 +165,7 @@ function CompositeContent() {
 
   const resultsUrl = typeof window !== 'undefined' ? window.location.href : '';
   const shareText = hasEnough
-    ? `My composite IQ across ${completedSlugs.length} cognitive tests is ${compositeIQ} on CalibratedIQ.org`
+    ? `My composite IQ across ${completedSlugs.length} cognitive tests is ${compositeIQ}. Take yours at CalibratedIQ.org`
     : '';
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(resultsUrl)}`;
 
@@ -192,10 +192,11 @@ function CompositeContent() {
       <div className="max-w-2xl mx-auto px-4 py-10 sm:py-16">
         <div className="text-center mb-10">
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
-            composite IQ score
+            Composite IQ Score
           </h1>
-          <p className="text-sm text-muted">
-            Complete at least {MIN_TESTS_FOR_COMPOSITE} tests to see your composite score
+          <p className="text-sm text-muted max-w-xl mx-auto">
+            Complete {MIN_TESTS_FOR_COMPOSITE} or more tests to see your
+            weighted composite IQ and a radar chart of your cognitive profile.
           </p>
         </div>
 
@@ -218,7 +219,7 @@ function CompositeContent() {
 
         <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-4">
-            Take more tests
+            Available Tests
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {incompleteSlugs.map((slug) => (
@@ -270,16 +271,16 @@ function CompositeContent() {
       {/* Composite IQ Score */}
       <div className="text-center mb-8">
         <p className="text-sm font-medium uppercase tracking-wide text-muted mb-2">
-          Your composite IQ ({completedSlugs.length} tests)
+          Composite IQ &middot; {completedSlugs.length} tests
         </p>
-        <p className="text-6xl sm:text-7xl font-bold tracking-tight mb-2">
+        <p className="text-6xl sm:text-7xl font-bold tracking-tight mb-2 tabular-nums">
           {compositeIQ}
         </p>
         <p className="text-lg font-medium text-primary dark:text-primary-light mb-1">
           {compositeClassification}
         </p>
         <p className="text-sm text-muted">
-          You scored higher than {compositePercentile}% of the population
+          Higher than {compositePercentile}% of the population.
         </p>
       </div>
 
@@ -364,7 +365,7 @@ function CompositeContent() {
       {/* Share section */}
       <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-4">
-          Share your composite score
+          Share Your Composite Score
         </h2>
         <div className="flex flex-col sm:flex-row gap-3">
           <a
@@ -389,8 +390,12 @@ function CompositeContent() {
       {incompleteSlugs.length > 0 && (
         <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-4">
-            Complete more tests for better accuracy
+            Refine Your Estimate
           </h2>
+          <p className="text-sm text-muted mb-4 leading-relaxed">
+            Each additional test tightens the composite. The remaining domains
+            below can be taken in any order.
+          </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {incompleteSlugs.map((slug) => (
               <Link

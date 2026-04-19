@@ -143,7 +143,7 @@ function ResultsShellContent({
 
   const resultsUrl =
     typeof window !== 'undefined' ? window.location.href : '';
-  const shareText = `I scored ${result.iq} on the ${testName} test at CalibratedIQ.org`;
+  const shareText = `I scored ${result.iq} on the ${testName} test. Take it at CalibratedIQ.org`;
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(resultsUrl)}`;
   const challengeUrl =
     typeof window !== 'undefined'
@@ -177,20 +177,20 @@ function ResultsShellContent({
       {/* IQ Score */}
       <div className="text-center mb-8">
         <p className="text-sm font-medium uppercase tracking-wide text-muted mb-2">
-          Your estimated IQ ({testName})
+          Estimated IQ &middot; {testName}
         </p>
-        <p className="text-6xl sm:text-7xl font-bold tracking-tight mb-2">
+        <p className="text-6xl sm:text-7xl font-bold tracking-tight mb-2 tabular-nums">
           {result.iq}
         </p>
         <p className="text-lg font-medium text-primary dark:text-primary-light mb-1">
           {result.classification}
         </p>
         <p className="text-sm text-muted">
-          You scored higher than {result.percentile}% of the population
+          Higher than {result.percentile}% of the population.
         </p>
         {result.mensaQualified && (
           <p className="text-sm font-medium text-primary dark:text-primary-light mt-2">
-            This score would qualify for Mensa membership (top 2%)
+            This score would qualify for Mensa membership (top 2%).
           </p>
         )}
       </div>
@@ -256,7 +256,7 @@ function ResultsShellContent({
       {/* Share section */}
       <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-4">
-          Share your score
+          Share Your Score
         </h2>
         <div className="flex flex-col sm:flex-row gap-3">
           <a
@@ -297,7 +297,7 @@ function ResultsShellContent({
       {/* Try other tests */}
       <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-4">
-          Try another test
+          Try Another Domain
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {otherTests.map((slug) => {
@@ -319,16 +319,17 @@ function ResultsShellContent({
       {/* Composite CTA */}
       <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8 text-center">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-2">
-          Composite IQ score
+          Composite IQ Score
         </h2>
-        <p className="text-sm text-muted mb-3">
-          Complete 3 or more tests to get your weighted composite IQ score across all cognitive domains.
+        <p className="text-sm text-muted mb-3 leading-relaxed max-w-lg mx-auto">
+          Complete three or more tests for a weighted composite IQ across all
+          cognitive domains, plus a radar chart of your profile.
         </p>
         <Link
-          href="/tests"
+          href="/composite"
           className="inline-flex items-center text-sm font-medium text-primary dark:text-primary-light hover:underline"
         >
-          View all tests &rarr;
+          View Composite Score &rarr;
         </Link>
       </div>
 

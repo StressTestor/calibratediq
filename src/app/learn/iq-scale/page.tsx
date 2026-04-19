@@ -40,12 +40,12 @@ const jsonLd = {
 
 const classifications = [
   { range: '145+', label: 'Profoundly Gifted', percentile: '99.87+', rarity: '1 in 741', sd: '+3.0 SD and above' },
-  { range: '130–144', label: 'Highly Gifted', percentile: '97.7–99.87', rarity: '1 in 44', sd: '+2.0 to +3.0 SD' },
-  { range: '120–129', label: 'Superior', percentile: '90.9–97.7', rarity: '1 in 11', sd: '+1.3 to +2.0 SD' },
-  { range: '110–119', label: 'High Average', percentile: '74.8–90.9', rarity: '1 in 4', sd: '+0.67 to +1.3 SD' },
-  { range: '90–109', label: 'Average', percentile: '25.2–74.8', rarity: '1 in 2', sd: '-0.67 to +0.67 SD' },
-  { range: '80–89', label: 'Low Average', percentile: '9.1–25.2', rarity: '1 in 4', sd: '-1.3 to -0.67 SD' },
-  { range: '70–79', label: 'Borderline', percentile: '2.3–9.1', rarity: '1 in 11', sd: '-2.0 to -1.3 SD' },
+  { range: '130-144', label: 'Highly Gifted', percentile: '97.7-99.87', rarity: '1 in 44', sd: '+2.0 to +3.0 SD' },
+  { range: '120-129', label: 'Superior', percentile: '90.9-97.7', rarity: '1 in 11', sd: '+1.3 to +2.0 SD' },
+  { range: '110-119', label: 'High Average', percentile: '74.8-90.9', rarity: '1 in 4', sd: '+0.67 to +1.3 SD' },
+  { range: '90-109', label: 'Average', percentile: '25.2-74.8', rarity: '1 in 2', sd: '-0.67 to +0.67 SD' },
+  { range: '80-89', label: 'Low Average', percentile: '9.1-25.2', rarity: '1 in 4', sd: '-1.3 to -0.67 SD' },
+  { range: '70-79', label: 'Borderline', percentile: '2.3-9.1', rarity: '1 in 11', sd: '-2.0 to -1.3 SD' },
   { range: 'Below 70', label: 'Extremely Low', percentile: 'Below 2.3', rarity: '1 in 44', sd: 'Below -2.0 SD' },
 ];
 
@@ -61,7 +61,7 @@ export default function IQScalePage() {
           {/* Main content */}
           <article className="flex-1 max-w-2xl">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-              IQ scale and score chart — what your score means
+              IQ Scale and Score Chart. What Your Score Means
             </h1>
 
             {/* Introduction */}
@@ -101,17 +101,17 @@ export default function IQScalePage() {
             {/* CTA 1 */}
             <div className="mb-10 text-center">
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Where would you fall? Take the test
+                Take a Test
               </Link>
             </div>
 
             {/* Full classification table */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                IQ classification table
+                IQ Classification Table
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted mb-6">
                 <p>
@@ -176,7 +176,7 @@ export default function IQScalePage() {
             {/* Bell curve explanation */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                the bell curve explained
+                The Bell Curve Explained
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -214,11 +214,11 @@ export default function IQScalePage() {
             {/* Practical meaning */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                what each range means in practice
+                What Each Range Means in Practice
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <h3 className="text-sm font-semibold text-text dark:text-text-dark mt-4">
-                  average (90-109)
+                  Average (90-109)
                 </h3>
                 <p>
                   Roughly half of the population falls within this range. Individuals here
@@ -228,7 +228,7 @@ export default function IQScalePage() {
                 </p>
 
                 <h3 className="text-sm font-semibold text-text dark:text-text-dark mt-4">
-                  high average to superior (110-129)
+                  High Average to Superior (110-129)
                 </h3>
                 <p>
                   Scores in this range indicate above-average cognitive ability. Individuals
@@ -238,7 +238,7 @@ export default function IQScalePage() {
                 </p>
 
                 <h3 className="text-sm font-semibold text-text dark:text-text-dark mt-4">
-                  gifted (130+)
+                  Gifted (130+)
                 </h3>
                 <p>
                   A score of 130 or above places a person in the top 2.3% of the population.
@@ -256,7 +256,7 @@ export default function IQScalePage() {
                 </p>
 
                 <h3 className="text-sm font-semibold text-text dark:text-text-dark mt-4">
-                  below average and borderline (70-89)
+                  Below Average and Borderline (70-89)
                 </h3>
                 <p>
                   Scores between 80 and 89 are classified as low average. Individuals may
@@ -267,7 +267,7 @@ export default function IQScalePage() {
                 </p>
 
                 <h3 className="text-sm font-semibold text-text dark:text-text-dark mt-4">
-                  below 70
+                  Below 70
                 </h3>
                 <p>
                   Scores below 70 are classified as extremely low. When combined with
@@ -290,7 +290,7 @@ export default function IQScalePage() {
             {/* Important context */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                important context
+                Important Context
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -324,16 +324,16 @@ export default function IQScalePage() {
                 Matrices methodology to estimate your fluid intelligence.
               </p>
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Take the free IQ test
+                Take a Free IQ Test
               </Link>
             </div>
 
             {/* References */}
             <section>
-              <h2 className="text-lg font-semibold mb-3">references</h2>
+              <h2 className="text-lg font-semibold mb-3">References</h2>
               <ul className="space-y-2 text-sm text-muted">
                 <li>
                   <a

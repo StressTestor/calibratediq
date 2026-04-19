@@ -43,7 +43,7 @@ export default function AverageIQPage() {
           {/* Main content */}
           <article className="flex-1 max-w-2xl">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-              average IQ scores — by age, country, and population
+              Average IQ Scores: By Age, Country, and Population
             </h1>
 
             {/* Introduction */}
@@ -51,7 +51,7 @@ export default function AverageIQPage() {
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
                   The average IQ score is 100. This is not an empirical discovery but a mathematical
-                  certainty — IQ tests are specifically designed and periodically re-normed so that
+                  certainty. IQ tests are specifically designed and periodically re-normed so that
                   the mean score in the general population is always 100, with a standard deviation
                   of 15. Roughly 50% of the population scores between 90 and 109, the range
                   classified as &quot;average&quot; on most{' '}
@@ -75,17 +75,17 @@ export default function AverageIQPage() {
             {/* CTA 1 */}
             <div className="mb-10 text-center">
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                How do you compare? Take the test
+                See How You Compare
               </Link>
             </div>
 
             {/* What average means statistically */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                what &quot;average&quot; means statistically
+                What &quot;Average&quot; Means Statistically
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -99,7 +99,7 @@ export default function AverageIQPage() {
                   >
                     normal distribution
                   </a>
-                  . A score of 100 is at the 50th percentile — exactly the median. The &quot;average
+                  . A score of 100 is at the 50th percentile, exactly the median. The &quot;average
                   range&quot; (90-109) encompasses roughly half the population, and these individuals
                   represent the broad middle of cognitive ability as measured by standardized tests.
                 </p>
@@ -130,7 +130,7 @@ export default function AverageIQPage() {
             {/* IQ across age groups */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                IQ across age groups
+                IQ Across Age Groups
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -147,8 +147,8 @@ export default function AverageIQPage() {
                   distinguishes between two primary forms:
                 </p>
                 <p>
-                  <strong>Fluid intelligence</strong> — the ability to reason through novel problems,
-                  identify patterns, and think abstractly — tends to peak in the late twenties and
+                  <strong>Fluid intelligence</strong>, the ability to reason through novel problems,
+                  identify patterns, and think abstractly, tends to peak in the late twenties and
                   begins a gradual decline thereafter. This is the type of intelligence primarily
                   measured by matrix reasoning tests like{' '}
                   <Link
@@ -159,8 +159,8 @@ export default function AverageIQPage() {
                   </Link>.
                 </p>
                 <p>
-                  <strong>Crystallized intelligence</strong> — accumulated knowledge, vocabulary,
-                  and learned problem-solving strategies — continues to increase well into middle
+                  <strong>Crystallized intelligence</strong>, accumulated knowledge, vocabulary,
+                  and learned problem-solving strategies, continues to increase well into middle
                   age and often remains stable or even grows into the sixties and seventies. For a
                   detailed comparison, see{' '}
                   <Link
@@ -182,7 +182,7 @@ export default function AverageIQPage() {
             {/* The Flynn Effect */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                the Flynn effect
+                The Flynn Effect
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -235,7 +235,7 @@ export default function AverageIQPage() {
             {/* Cross-national comparisons */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                cross-national IQ comparisons
+                Cross-National IQ Comparisons
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -255,7 +255,7 @@ export default function AverageIQPage() {
                   These correlations point to environmental causation, not innate differences between
                   populations. The Flynn effect itself demonstrates this: countries that have
                   undergone rapid economic development have seen their average IQ scores rise
-                  dramatically within a single generation — far too quickly to reflect genetic
+                  dramatically within a single generation, far too quickly to reflect genetic
                   change. For example, gains of 15-20 points over 30 years have been documented
                   in countries experiencing rapid industrialization.
                 </p>
@@ -271,7 +271,7 @@ export default function AverageIQPage() {
             {/* Criticisms */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                criticisms of cross-country IQ data
+                Criticisms of Cross-Country IQ Data
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -317,16 +317,16 @@ export default function AverageIQPage() {
                 measure fluid intelligence and place you on the distribution.
               </p>
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Take the free IQ test
+                Take a Free IQ Test
               </Link>
             </div>
 
             {/* References */}
             <section>
-              <h2 className="text-lg font-semibold mb-3">references</h2>
+              <h2 className="text-lg font-semibold mb-3">References</h2>
               <ul className="space-y-2 text-sm text-muted">
                 <li>
                   <a

@@ -49,7 +49,7 @@ export default function FluidVsCrystallizedPage() {
           {/* Main content */}
           <article className="flex-1 max-w-2xl">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-              fluid vs crystallized intelligence — what&apos;s the difference?
+              Fluid vs Crystallized Intelligence. What&apos;s the Difference?
             </h1>
 
             {/* Introduction */}
@@ -80,17 +80,17 @@ export default function FluidVsCrystallizedPage() {
             {/* CTA 1 */}
             <div className="mb-10 text-center">
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                This test measures fluid intelligence — try it
+                Try a Fluid Intelligence Test
               </Link>
             </div>
 
             {/* Cattell-Horn theory */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                the Cattell-Horn theory
+                The Cattell-Horn Theory
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -146,7 +146,7 @@ export default function FluidVsCrystallizedPage() {
             {/* What is fluid intelligence */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                what is fluid intelligence (Gf)?
+                What Is Fluid Intelligence (Gf)?
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -190,7 +190,7 @@ export default function FluidVsCrystallizedPage() {
             {/* What is crystallized intelligence */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                what is crystallized intelligence (Gc)?
+                What Is Crystallized Intelligence (Gc)?
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -222,7 +222,7 @@ export default function FluidVsCrystallizedPage() {
             {/* How they change with age */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                how they change with age
+                How They Change With Age
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -260,7 +260,7 @@ export default function FluidVsCrystallizedPage() {
             {/* Why matrix tests measure Gf */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                why matrix tests measure fluid intelligence
+                Why Matrix Tests Measure Fluid Intelligence
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -304,7 +304,7 @@ export default function FluidVsCrystallizedPage() {
             {/* The relationship between Gf and Gc */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                the relationship between Gf and Gc
+                The Relationship Between Gf and Gc
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -344,16 +344,16 @@ export default function FluidVsCrystallizedPage() {
                 the component of IQ least dependent on background or education.
               </p>
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Take the fluid intelligence test
+                Take a Fluid Intelligence Test
               </Link>
             </div>
 
             {/* References */}
             <section>
-              <h2 className="text-lg font-semibold mb-3">references</h2>
+              <h2 className="text-lg font-semibold mb-3">References</h2>
               <ul className="space-y-2 text-sm text-muted">
                 <li>
                   <a

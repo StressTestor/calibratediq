@@ -15,23 +15,26 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'CalibratedIQ - Free IQ Test Based on Raven\'s Progressive Matrices',
+    default: 'CalibratedIQ - Free Online IQ Tests with Composite Scoring',
     template: '%s | CalibratedIQ',
   },
   other: {
     monetag: 'ea3318283a4679bd550669792643d35d',
   },
   description:
-    'Take a free IQ test based on Raven\'s Progressive Matrices. 30 pattern recognition puzzles measuring fluid intelligence. Get your IQ score, percentile rank, and shareable results instantly.',
+    'Six free cognitive tests scored on a normal-distribution IQ scale. Complete three or more for a composite IQ and cognitive profile. No signup required.',
   keywords: [
     'free IQ test',
     'IQ test online',
-    'Raven\'s Progressive Matrices',
-    'pattern recognition IQ test',
-    'fluid intelligence test',
-    'IQ score',
-    'intelligence test',
     'cognitive assessment',
+    'composite IQ',
+    'pattern recognition test',
+    'spatial reasoning test',
+    'working memory test',
+    'verbal reasoning test',
+    'logical reasoning test',
+    'numerical reasoning test',
+    'fluid intelligence test',
   ],
   metadataBase: new URL('https://calibratediq.org'),
   alternates: {
@@ -42,15 +45,15 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://calibratediq.org',
     siteName: 'CalibratedIQ',
-    title: 'CalibratedIQ - Free IQ Test',
+    title: 'CalibratedIQ - Free Online IQ Tests',
     description:
-      'A free, scientifically-grounded IQ assessment based on Raven\'s Progressive Matrices methodology.',
+      'Six cognitive domain tests on a normal-distribution IQ scale, plus a weighted composite score.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CalibratedIQ - Free IQ Test',
+    title: 'CalibratedIQ - Free Online IQ Tests',
     description:
-      'A free, scientifically-grounded IQ assessment based on Raven\'s Progressive Matrices methodology.',
+      'Six cognitive domain tests on a normal-distribution IQ scale, plus a weighted composite score.',
   },
 };
 

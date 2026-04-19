@@ -43,7 +43,7 @@ export default function IQTestAccuracyPage() {
           {/* Main content */}
           <article className="flex-1 max-w-2xl">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-              are online IQ tests accurate? what to look for
+              Are Online IQ Tests Accurate? What to Look For
             </h1>
 
             {/* Introduction */}
@@ -68,26 +68,26 @@ export default function IQTestAccuracyPage() {
             {/* CTA 1 */}
             <div className="mb-10 text-center">
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                See how a properly calibrated test works
+                See How a Properly Calibrated Test Works
               </Link>
             </div>
 
             {/* What makes a good IQ test */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                what makes a good IQ test
+                What Makes a Good IQ Test
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
                   A legitimate IQ test, whether administered in a clinic or online, must satisfy
-                  several psychometric criteria. Without these, a score is essentially meaningless
-                  — a number without a valid referent.
+                  several psychometric criteria. Without these, a score is essentially meaningless:
+                  a number without a valid referent.
                 </p>
                 <h3 className="text-sm font-semibold mt-4 mb-2 text-text dark:text-text-dark">
-                  standardized norming
+                  Standardized Norming
                 </h3>
                 <p>
                   IQ scores are relative measures. A score of 115 means &quot;one standard deviation
@@ -109,12 +109,12 @@ export default function IQTestAccuracyPage() {
                   large sample.
                 </p>
                 <h3 className="text-sm font-semibold mt-4 mb-2 text-text dark:text-text-dark">
-                  culture-fair design
+                  Culture-Fair Design
                 </h3>
                 <p>
                   Tests that rely on vocabulary, general knowledge, or culturally specific reasoning
                   patterns advantage test-takers from particular backgrounds. Culture-fair tests
-                  minimize this bias by using non-verbal, abstract reasoning tasks — geometric
+                  minimize this bias by using non-verbal, abstract reasoning tasks: geometric
                   patterns, matrix completion, series continuation. The gold standard for
                   culture-fair testing is{' '}
                   <Link
@@ -127,7 +127,7 @@ export default function IQTestAccuracyPage() {
                   psychometric properties.
                 </p>
                 <h3 className="text-sm font-semibold mt-4 mb-2 text-text dark:text-text-dark">
-                  proper statistical calibration
+                  Proper Statistical Calibration
                 </h3>
                 <p>
                   The test&apos;s scoring algorithm should produce a distribution that approximates
@@ -147,7 +147,7 @@ export default function IQTestAccuracyPage() {
             {/* Red flags */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                red flags: signs of a bad IQ test
+                Red Flags: Signs of a Bad IQ Test
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -195,11 +195,11 @@ export default function IQTestAccuracyPage() {
             {/* Reliability and validity */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                reliability, validity, and standard error
+                Reliability, Validity, and Standard Error
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <h3 className="text-sm font-semibold mt-4 mb-2 text-text dark:text-text-dark">
-                  reliability
+                  Reliability
                 </h3>
                 <p>
                   <a
@@ -223,7 +223,7 @@ export default function IQTestAccuracyPage() {
                   instruments.
                 </p>
                 <h3 className="text-sm font-semibold mt-4 mb-2 text-text dark:text-text-dark">
-                  validity
+                  Validity
                 </h3>
                 <p>
                   <a
@@ -257,7 +257,7 @@ export default function IQTestAccuracyPage() {
                   of general intelligence.
                 </p>
                 <h3 className="text-sm font-semibold mt-4 mb-2 text-text dark:text-text-dark">
-                  standard error of measurement
+                  Standard Error of Measurement
                 </h3>
                 <p>
                   Every test score includes some degree of measurement error. The{' '}
@@ -287,7 +287,7 @@ export default function IQTestAccuracyPage() {
             {/* Screening tools vs clinical diagnostics */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                screening tools vs clinical diagnostics
+                Screening Tools vs Clinical Diagnostics
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -305,14 +305,14 @@ export default function IQTestAccuracyPage() {
                 </p>
                 <p>
                   An online test offers none of this context. What it can offer is a reasonable
-                  estimate of one dimension of cognitive ability — particularly{' '}
+                  estimate of one dimension of cognitive ability, particularly{' '}
                   <Link
                     href="/learn/fluid-vs-crystallized-intelligence"
                     className="underline hover:text-text dark:hover:text-text-dark transition-colors"
                   >
                     fluid intelligence
-                  </Link>{' '}
-                  — when it uses proven methodology. A matrix-based online test with proper scoring
+                  </Link>
+                  , when it uses proven methodology. A matrix-based online test with proper scoring
                   calibration is far more meaningful than a trivia quiz claiming to measure IQ, even
                   though neither replaces a clinical assessment.
                 </p>
@@ -322,7 +322,7 @@ export default function IQTestAccuracyPage() {
             {/* What differentiates a good online test */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                what to look for in an online IQ test
+                What to Look for in an Online IQ Test
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -371,10 +371,10 @@ export default function IQTestAccuracyPage() {
                 scoring model, and provides free results with full methodology transparency.
               </p>
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Try the calibrated IQ test
+                Try the Calibrated IQ Test
               </Link>
             </div>
 
@@ -400,7 +400,7 @@ export default function IQTestAccuracyPage() {
 
             {/* References */}
             <section>
-              <h2 className="text-lg font-semibold mb-3">references</h2>
+              <h2 className="text-lg font-semibold mb-3">References</h2>
               <ul className="space-y-2 text-sm text-muted">
                 <li>
                   <a

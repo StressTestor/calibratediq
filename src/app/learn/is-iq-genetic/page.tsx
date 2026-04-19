@@ -43,7 +43,7 @@ export default function IsIQGeneticPage() {
           {/* Main content */}
           <article className="flex-1 max-w-2xl">
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-8">
-              is IQ genetic? nature vs nurture in intelligence
+              Is IQ Genetic? Nature vs Nurture in Intelligence
             </h1>
 
             {/* Introduction */}
@@ -69,17 +69,17 @@ export default function IsIQGeneticPage() {
             {/* CTA 1 */}
             <div className="mb-10 text-center">
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Genetics or not, find out where you stand
+                Find Out Where You Stand
               </Link>
             </div>
 
             {/* Twin studies */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                twin studies
+                Twin Studies
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -116,7 +116,7 @@ export default function IsIQGeneticPage() {
                     Minnesota Study of Twins Reared Apart
                   </a>{' '}
                   (MISTRA), led by Thomas Bouchard, found that identical twins separated at birth
-                  and raised in different families had IQ correlations of approximately 0.75 — lower
+                  and raised in different families had IQ correlations of approximately 0.75, lower
                   than identical twins raised together (0.85), but far higher than fraternal twins
                   raised together (0.55). This pattern indicates that genetic factors play a major
                   role, but shared environment also contributes.
@@ -132,7 +132,7 @@ export default function IsIQGeneticPage() {
             {/* Heritability estimates */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                heritability estimates
+                Heritability Estimates
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -156,7 +156,7 @@ export default function IsIQGeneticPage() {
                   lies in gene-environment correlation, discussed below.
                 </p>
                 <h3 className="text-sm font-semibold mt-4 mb-2 text-text dark:text-text-dark">
-                  what heritability actually means
+                  What Heritability Actually Means
                 </h3>
                 <p>
                   Heritability is frequently misunderstood, and getting the definition right is
@@ -169,8 +169,8 @@ export default function IsIQGeneticPage() {
                   It does not mean that IQ is &quot;X% genetic.&quot; It does not apply across
                   populations or across different environments. Heritability can change if the
                   environment changes. In a hypothetical society where everyone received identical
-                  education, nutrition, and stimulation, the heritability of IQ would approach 100%
-                  — because all remaining variation would be genetic. Conversely, in environments
+                  education, nutrition, and stimulation, the heritability of IQ would approach 100%,
+                  because all remaining variation would be genetic. Conversely, in environments
                   with extreme inequality, environmental factors account for more variance, and
                   heritability is lower.
                 </p>
@@ -180,7 +180,7 @@ export default function IsIQGeneticPage() {
             {/* Environmental factors */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                environmental factors
+                Environmental Factors
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -226,9 +226,8 @@ export default function IsIQGeneticPage() {
                     className="underline hover:text-text dark:hover:text-text-dark transition-colors"
                   >
                     Flynn effect
-                  </a>{' '}
-                  — the observation that average IQ scores have risen approximately 3 points per
-                  decade across the 20th century — provides further evidence that environmental
+                  </a>, the observation that average IQ scores have risen approximately 3 points per
+                  decade across the 20th century, provides further evidence that environmental
                   factors can produce large shifts in measured intelligence at the population level.
                   For more on this phenomenon, see{' '}
                   <Link
@@ -244,7 +243,7 @@ export default function IsIQGeneticPage() {
             {/* Gene-environment interaction */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                gene-environment interaction and the Wilson effect
+                Gene-Environment Interaction and the Wilson Effect
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -264,7 +263,7 @@ export default function IsIQGeneticPage() {
                   occurs when genetic predispositions lead individuals to select, modify, or evoke
                   particular environments. A child with a genetic predisposition for high cognitive
                   ability may seek out intellectually stimulating activities, be placed in advanced
-                  educational programs, and receive more encouraging responses from teachers — all
+                  educational programs, and receive more encouraging responses from teachers, all
                   of which further develop their cognitive skills. This active gene-environment
                   correlation increases with age as individuals gain more control over their
                   environments.
@@ -282,7 +281,7 @@ export default function IsIQGeneticPage() {
                   : the observation that the heritability of IQ increases from childhood to
                   adulthood. As children grow into adults, they increasingly shape their own
                   environments in ways that amplify genetic predispositions. The result is that
-                  genetic influence on IQ appears to grow over time — not because the genes change,
+                  genetic influence on IQ appears to grow over time, not because the genes change,
                   but because the environment becomes increasingly correlated with the genotype.
                 </p>
               </div>
@@ -291,7 +290,7 @@ export default function IsIQGeneticPage() {
             {/* Epigenetics */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                epigenetics and molecular genetics
+                Epigenetics and Molecular Genetics
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -313,7 +312,7 @@ export default function IsIQGeneticPage() {
                   Genome-wide association studies (GWAS) have identified thousands of genetic
                   variants associated with intelligence, each with a very small individual effect.
                   The largest studies to date suggest that no single gene accounts for more than a
-                  tiny fraction of IQ variation. Intelligence is highly polygenic — influenced by
+                  tiny fraction of IQ variation. Intelligence is highly polygenic, influenced by
                   many thousands of genetic variants, each contributing a negligible amount
                   individually but summing to a substantial collective effect.
                 </p>
@@ -328,7 +327,7 @@ export default function IsIQGeneticPage() {
             {/* Why the framing is misleading */}
             <section className="mb-10">
               <h2 className="text-lg font-semibold mb-3">
-                why &quot;nature vs nurture&quot; is the wrong question
+                Why &quot;Nature vs Nurture&quot; Is the Wrong Question
               </h2>
               <div className="space-y-3 text-sm leading-relaxed text-muted">
                 <p>
@@ -374,16 +373,16 @@ export default function IsIQGeneticPage() {
                 matrix reasoning to estimate your fluid intelligence score.
               </p>
               <Link
-                href="/test"
+                href="/tests"
                 className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-primary hover:bg-primary-light rounded-lg transition-colors"
               >
-                Take the free IQ test
+                Take a Free IQ Test
               </Link>
             </div>
 
             {/* References */}
             <section>
-              <h2 className="text-lg font-semibold mb-3">references</h2>
+              <h2 className="text-lg font-semibold mb-3">References</h2>
               <ul className="space-y-2 text-sm text-muted">
                 <li>
                   <a
