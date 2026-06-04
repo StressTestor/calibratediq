@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { CookieConsent } from '@/components/cookie-consent';
+import { BrandMark } from '@/components/brand-mark';
 import './globals.css';
 
 const inter = Inter({
@@ -68,24 +69,28 @@ export default function RootLayout({
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col bg-bg dark:bg-bg-dark text-text dark:text-text-dark">
         {/* Header */}
-        <header className="w-full border-b border-border dark:border-border-dark">
-          <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+        <header className="sticky top-0 z-40 w-full border-b border-border/70 dark:border-border-dark/70 bg-bg/80 dark:bg-bg-dark/75 backdrop-blur-md">
+          <div className="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
             <Link
               href="/"
-              className="text-lg font-semibold tracking-tight text-text dark:text-text-dark hover:text-primary dark:hover:text-primary-light transition-colors"
+              className="flex items-center gap-2 group"
+              aria-label="CalibratedIQ home"
             >
-              CalibratedIQ
+              <BrandMark className="h-7 w-7 shrink-0" />
+              <span className="text-base font-semibold tracking-tight text-text dark:text-text-dark">
+                Calibrated<span className="text-primary dark:text-primary-light">IQ</span>
+              </span>
             </Link>
-            <nav className="flex items-center gap-4">
+            <nav className="flex items-center gap-1">
               <Link
                 href="/tests"
-                className="text-sm text-muted hover:text-text dark:hover:text-text-dark transition-colors"
+                className="px-3 py-1.5 rounded-md text-sm text-muted hover:text-text dark:hover:text-text-dark hover:bg-surface-2 dark:hover:bg-surface-2-dark transition-colors"
               >
                 Tests
               </Link>
               <Link
                 href="/learn"
-                className="text-sm text-muted hover:text-text dark:hover:text-text-dark transition-colors"
+                className="px-3 py-1.5 rounded-md text-sm text-muted hover:text-text dark:hover:text-text-dark hover:bg-surface-2 dark:hover:bg-surface-2-dark transition-colors"
               >
                 Learn
               </Link>
@@ -98,11 +103,25 @@ export default function RootLayout({
 
         {/* Footer */}
         <footer className="w-full border-t border-border dark:border-border-dark mt-auto">
-          <div className="max-w-4xl mx-auto px-4 py-6 flex flex-col gap-3">
-            <p className="text-xs text-muted">
-              For entertainment and educational purposes. Not a clinical diagnostic tool.
-            </p>
-            <nav className="flex gap-4">
+          <div className="max-w-4xl mx-auto px-4 py-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <BrandMark className="h-6 w-6 shrink-0" />
+              <div className="flex flex-col">
+                <span className="text-sm font-semibold tracking-tight">
+                  Calibrated<span className="text-primary dark:text-primary-light">IQ</span>
+                </span>
+                <span className="text-xs text-muted">
+                  For education and entertainment. Not a clinical diagnostic.
+                </span>
+              </div>
+            </div>
+            <nav className="flex flex-wrap gap-x-5 gap-y-2">
+              <Link
+                href="/tests"
+                className="text-xs text-muted hover:text-text dark:hover:text-text-dark transition-colors"
+              >
+                Tests
+              </Link>
               <Link
                 href="/learn"
                 className="text-xs text-muted hover:text-text dark:hover:text-text-dark transition-colors"

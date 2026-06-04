@@ -86,7 +86,7 @@ export function BellCurve({ iq, percentile }: BellCurveProps): React.ReactNode {
         <path
           d={shadedPath}
           fill="currentColor"
-          className="text-teal-500/20 dark:text-teal-400/20"
+          className="text-primary/15 dark:text-primary-light/20"
         />
 
         {/* Curve */}
@@ -157,7 +157,7 @@ export function BellCurve({ iq, percentile }: BellCurveProps): React.ReactNode {
           x2={userX}
           y2={baseline}
           stroke="currentColor"
-          className="text-teal-600 dark:text-teal-400"
+          className="text-primary dark:text-primary-light"
           strokeWidth={2}
           strokeDasharray="4 2"
         />
@@ -168,7 +168,7 @@ export function BellCurve({ iq, percentile }: BellCurveProps): React.ReactNode {
           cy={userY}
           r={4}
           fill="currentColor"
-          className="text-teal-600 dark:text-teal-400"
+          className="text-primary dark:text-primary-light"
         />
 
         {/* User score label */}
@@ -179,7 +179,7 @@ export function BellCurve({ iq, percentile }: BellCurveProps): React.ReactNode {
           fontSize={12}
           fontWeight="bold"
           fill="currentColor"
-          className="text-teal-700 dark:text-teal-300"
+          className="text-primary dark:text-primary-light"
         >
           IQ {iq}
         </text>

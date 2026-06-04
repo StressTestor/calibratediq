@@ -8,7 +8,8 @@ import { computeScore, decodeAnswers, TOTAL_QUESTIONS } from '@/lib/scoring';
 import { BellCurve } from '@/components/bell-curve';
 import { AdPlaceholder } from '@/components/ad-placeholder';
 import { Question } from '@/lib/tests/types';
-import { TEST_SLUGS, TestSlug } from '@/lib/tests/types';
+import { TEST_SLUGS } from '@/lib/tests/types';
+import { DOMAIN_META, tint } from '@/lib/tests/domain-meta';
 
 interface ResultsShellProps {
   testSlug: string;
@@ -22,16 +23,6 @@ function formatTime(seconds: number): string {
   const s = seconds % 60;
   return `${m} min ${s} sec`;
 }
-
-// Static metadata for other test types (avoid async imports in render)
-const TEST_META: Record<TestSlug, { name: string; icon: string }> = {
-  matrix: { name: 'Pattern Recognition', icon: '\u25E7' },
-  spatial: { name: 'Spatial Reasoning', icon: '\u2B21' },
-  numerical: { name: 'Number Sequences', icon: '\u2211' },
-  logical: { name: 'Logical Reasoning', icon: '\u2234' },
-  verbal: { name: 'Verbal Reasoning', icon: '\u2261' },
-  memory: { name: 'Working Memory', icon: '\u29C9' },
-};
 
 function ResultsShellContent({
   testSlug,
@@ -166,6 +157,7 @@ function ResultsShellContent({
 
   // Other test types to suggest
   const otherTests = TEST_SLUGS.filter(s => s !== testSlug);
+  const domain = DOMAIN_META[testSlug as keyof typeof DOMAIN_META] ?? DOMAIN_META.matrix;
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8 sm:py-14">
@@ -174,34 +166,38 @@ function ResultsShellContent({
         <AdPlaceholder zone="banner" />
       </div>
 
-      {/* IQ Score */}
-      <div className="text-center mb-8">
-        <p className="text-sm font-medium uppercase tracking-wide text-muted mb-2">
-          Estimated IQ &middot; {testName}
-        </p>
-        <p className="text-6xl sm:text-7xl font-bold tracking-tight mb-2 tabular-nums">
-          {result.iq}
-        </p>
-        <p className="text-lg font-medium text-primary dark:text-primary-light mb-1">
-          {result.classification}
-        </p>
-        <p className="text-sm text-muted">
-          Higher than {result.percentile}% of the population.
-        </p>
-        {result.mensaQualified && (
-          <p className="text-sm font-medium text-primary dark:text-primary-light mt-2">
-            This score would qualify for Mensa membership (top 2%).
+      {/* Score panel — IQ hero + bell curve */}
+      <div className="cq-card p-6 sm:p-8 mb-6">
+        <div className="text-center mb-6">
+          <span
+            className="cq-badge mb-4"
+            style={{ backgroundColor: tint(domain.color), color: domain.color }}
+          >
+            <span aria-hidden="true">{domain.icon}</span> {testName}
+          </span>
+          <p className="text-xs font-medium uppercase tracking-wide text-muted mb-1">
+            Estimated IQ
           </p>
-        )}
-      </div>
+          <p className="text-7xl sm:text-8xl font-bold tracking-tight leading-none mb-3 tabular-nums text-primary dark:text-primary-light">
+            {result.iq}
+          </p>
+          <p className="text-lg font-semibold mb-1">{result.classification}</p>
+          <p className="text-sm text-muted">
+            Higher than {result.percentile}% of people.
+          </p>
+          {result.mensaQualified && (
+            <span className="cq-badge mt-4">Qualifies for Mensa &middot; top 2%</span>
+          )}
+        </div>
 
-      {/* Bell Curve */}
-      <div className="flex justify-center mb-10">
-        <BellCurve iq={result.iq} percentile={result.percentile} />
+        {/* Bell Curve */}
+        <div className="flex justify-center">
+          <BellCurve iq={result.iq} percentile={result.percentile} />
+        </div>
       </div>
 
       {/* Breakdown */}
-      <div className="border border-border dark:border-border-dark rounded-lg overflow-hidden mb-8">
+      <div className="cq-card overflow-hidden mb-8">
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-neutral-50 dark:bg-neutral-800/50 border-b border-border dark:border-border-dark">
@@ -254,9 +250,9 @@ function ResultsShellContent({
       </div>
 
       {/* Share section */}
-      <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8">
+      <div className="cq-card p-5 mb-8">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-4">
-          Share Your Score
+          Share your score
         </h2>
         <div className="flex flex-col sm:flex-row gap-3">
           <a
@@ -295,20 +291,31 @@ function ResultsShellContent({
       </div>
 
       {/* Try other tests */}
-      <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8">
+      <div className="cq-card p-5 mb-8">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-4">
-          Try Another Domain
+          Try another domain
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           {otherTests.map((slug) => {
-            const meta = TEST_META[slug];
+            const meta = DOMAIN_META[slug];
             return (
               <Link
                 key={slug}
                 href={`/test/${slug}`}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg border border-border dark:border-border-dark hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-border dark:border-border-dark hover:bg-surface-2 dark:hover:bg-surface-2-dark transition-colors"
               >
-                <span className="text-xl">{meta.icon}</span>
+                <span
+                  className="cq-tile shrink-0"
+                  style={{
+                    backgroundColor: tint(meta.color),
+                    color: meta.color,
+                    width: '2.25rem',
+                    height: '2.25rem',
+                    fontSize: '1.125rem',
+                  }}
+                >
+                  {meta.icon}
+                </span>
                 <span className="text-sm font-medium">{meta.name}</span>
               </Link>
             );
@@ -317,7 +324,7 @@ function ResultsShellContent({
       </div>
 
       {/* Composite CTA */}
-      <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8 text-center">
+      <div className="cq-card p-5 mb-8 text-center">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-2">
           Composite IQ Score
         </h2>

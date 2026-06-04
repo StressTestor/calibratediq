@@ -19,6 +19,7 @@ import {
 } from '@/lib/tests/composite';
 import { loadResults, clearResults } from '@/lib/results-store';
 import { ClearHistoryDialog } from '@/components/clear-history-dialog';
+import { DOMAIN_META, tint } from '@/lib/tests/domain-meta';
 
 // We need synchronous access to generateQuestion for each test type.
 // Import them directly since this page needs all of them.
@@ -38,14 +39,25 @@ const TEST_MODULES: Record<TestSlug, { generateQuestion: (seed: number, idx: num
   memory: memoryTest,
 };
 
-const TEST_META: Record<TestSlug, { icon: string }> = {
-  matrix: { icon: '\u25E7' },
-  spatial: { icon: '\u2B21' },
-  numerical: { icon: '\u2211' },
-  logical: { icon: '\u2234' },
-  verbal: { icon: '\u2261' },
-  memory: { icon: '\u29C9' },
-};
+/** Small colored domain tile (matches the homepage / results palette). */
+function DomainTile({ slug, size = 2.25 }: { slug: TestSlug; size?: number }) {
+  const meta = DOMAIN_META[slug];
+  return (
+    <span
+      className="cq-tile shrink-0"
+      style={{
+        backgroundColor: tint(meta.color),
+        color: meta.color,
+        width: `${size}rem`,
+        height: `${size}rem`,
+        fontSize: `${size * 0.5}rem`,
+      }}
+      aria-hidden="true"
+    >
+      {meta.icon}
+    </span>
+  );
+}
 
 function CompositeContent() {
   const searchParams = useSearchParams();
@@ -191,44 +203,47 @@ function CompositeContent() {
     return (
       <div className="max-w-2xl mx-auto px-4 py-10 sm:py-16">
         <div className="text-center mb-10">
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
-            Composite IQ Score
+          <span className="cq-badge mb-4">Composite profile</span>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+            Composite IQ score
           </h1>
-          <p className="text-sm text-muted max-w-xl mx-auto">
+          <p className="text-sm sm:text-base text-muted max-w-xl mx-auto leading-relaxed">
             Complete {MIN_TESTS_FOR_COMPOSITE} or more tests to see your
             weighted composite IQ and a radar chart of your cognitive profile.
           </p>
         </div>
 
         {completedSlugs.length > 0 && (
-          <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8">
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-4">
-              Completed ({completedSlugs.length} / {MIN_TESTS_FOR_COMPOSITE} minimum)
+          <div className="cq-card p-5 mb-6">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-3">
+              Completed &middot; {completedSlugs.length} of {MIN_TESTS_FOR_COMPOSITE} minimum
             </h2>
-            {completedSlugs.map((slug) => (
-              <div key={slug} className="flex items-center justify-between py-2">
-                <span className="flex items-center gap-2 text-sm">
-                  <span className="text-lg">{TEST_META[slug].icon}</span>
-                  {COMPOSITE_LABELS[slug]}
-                </span>
-                <span className="text-sm font-medium tabular-nums">IQ {testIQs[slug]}</span>
-              </div>
-            ))}
+            <div className="divide-y divide-border dark:divide-border-dark">
+              {completedSlugs.map((slug) => (
+                <div key={slug} className="flex items-center justify-between py-2.5">
+                  <span className="flex items-center gap-2.5 text-sm font-medium">
+                    <DomainTile slug={slug} size={2} />
+                    {COMPOSITE_LABELS[slug]}
+                  </span>
+                  <span className="text-sm font-semibold tabular-nums">IQ {testIQs[slug]}</span>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
-        <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8">
+        <div className="cq-card p-5 mb-8">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-4">
-            Available Tests
+            Available tests
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {incompleteSlugs.map((slug) => (
               <Link
                 key={slug}
                 href={`/test/${slug}`}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg border border-border dark:border-border-dark hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-border dark:border-border-dark hover:bg-surface-2 dark:hover:bg-surface-2-dark transition-colors"
               >
-                <span className="text-xl">{TEST_META[slug].icon}</span>
+                <DomainTile slug={slug} size={2.25} />
                 <span className="text-sm font-medium">{COMPOSITE_LABELS[slug]}</span>
               </Link>
             ))}
@@ -268,42 +283,45 @@ function CompositeContent() {
         <AdPlaceholder zone="banner" />
       </div>
 
-      {/* Composite IQ Score */}
-      <div className="text-center mb-8">
-        <p className="text-sm font-medium uppercase tracking-wide text-muted mb-2">
-          Composite IQ &middot; {completedSlugs.length} tests
-        </p>
-        <p className="text-6xl sm:text-7xl font-bold tracking-tight mb-2 tabular-nums">
-          {compositeIQ}
-        </p>
-        <p className="text-lg font-medium text-primary dark:text-primary-light mb-1">
-          {compositeClassification}
-        </p>
-        <p className="text-sm text-muted">
-          Higher than {compositePercentile}% of the population.
-        </p>
-      </div>
+      {/* Composite IQ Score + radar */}
+      <div className="cq-card p-6 sm:p-8 mb-6">
+        <div className="text-center mb-4">
+          <span className="cq-badge mb-4">Composite &middot; {completedSlugs.length} tests</span>
+          <p className="text-xs font-medium uppercase tracking-wide text-muted mb-1">
+            Weighted composite IQ
+          </p>
+          <p className="text-7xl sm:text-8xl font-bold tracking-tight leading-none mb-3 tabular-nums text-primary dark:text-primary-light">
+            {compositeIQ}
+          </p>
+          <p className="text-lg font-semibold mb-1">{compositeClassification}</p>
+          <p className="text-sm text-muted">
+            Higher than {compositePercentile}% of people.
+          </p>
+        </div>
 
-      {/* Radar Chart */}
-      <div className="mb-10">
+        {/* Radar Chart — short axis labels so they fit inside the chart bounds */}
         <RadarChart
           scores={testIQs as Partial<Record<string, number>>}
-          labels={COMPOSITE_LABELS as Record<string, string>}
+          labels={
+            Object.fromEntries(
+              TEST_SLUGS.map((s) => [s, DOMAIN_META[s].short]),
+            ) as Record<string, string>
+          }
         />
       </div>
 
       {/* Ad between chart and breakdown */}
-      <div className="flex justify-center my-6">
+      <div className="flex justify-center mb-6">
         <AdPlaceholder zone="native" />
       </div>
 
       {/* Bell Curve */}
-      <div className="flex justify-center mb-10">
+      <div className="cq-card p-5 sm:p-6 flex justify-center mb-8">
         <BellCurve iq={compositeIQ} percentile={compositePercentile} />
       </div>
 
       {/* Individual test scores table */}
-      <div className="border border-border dark:border-border-dark rounded-lg overflow-hidden mb-8">
+      <div className="cq-card overflow-hidden mb-8">
         <table className="w-full text-sm">
           <thead>
             <tr className="bg-neutral-50 dark:bg-neutral-800/50 border-b border-border dark:border-border-dark">
@@ -322,8 +340,8 @@ function CompositeContent() {
                   className="border-b border-border dark:border-border-dark last:border-b-0"
                 >
                   <td className="px-4 py-2.5">
-                    <span className="flex items-center gap-2">
-                      <span className="text-base">{TEST_META[slug].icon}</span>
+                    <span className="flex items-center gap-2.5">
+                      <DomainTile slug={slug} size={1.75} />
                       {COMPOSITE_LABELS[slug]}
                     </span>
                   </td>
@@ -363,9 +381,9 @@ function CompositeContent() {
       </div>
 
       {/* Share section */}
-      <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8">
+      <div className="cq-card p-5 mb-8">
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-4">
-          Share Your Composite Score
+          Share your composite score
         </h2>
         <div className="flex flex-col sm:flex-row gap-3">
           <a
@@ -388,22 +406,22 @@ function CompositeContent() {
 
       {/* Complete more tests */}
       {incompleteSlugs.length > 0 && (
-        <div className="border border-border dark:border-border-dark rounded-lg p-5 mb-8">
+        <div className="cq-card p-5 mb-8">
           <h2 className="text-sm font-semibold uppercase tracking-wide text-muted mb-4">
-            Refine Your Estimate
+            Refine your estimate
           </h2>
           <p className="text-sm text-muted mb-4 leading-relaxed">
             Each additional test tightens the composite. The remaining domains
             below can be taken in any order.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {incompleteSlugs.map((slug) => (
               <Link
                 key={slug}
                 href={`/test/${slug}`}
-                className="flex items-center gap-3 px-4 py-3 rounded-lg border border-border dark:border-border-dark hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg border border-border dark:border-border-dark hover:bg-surface-2 dark:hover:bg-surface-2-dark transition-colors"
               >
-                <span className="text-xl">{TEST_META[slug].icon}</span>
+                <DomainTile slug={slug} size={2.25} />
                 <span className="text-sm font-medium">{COMPOSITE_LABELS[slug]}</span>
               </Link>
             ))}

@@ -16,17 +16,18 @@ export default async function Image() {
           justifyContent: 'center',
           width: '100%',
           height: '100%',
-          backgroundColor: '#0a0a1a',
-          color: '#e0e0e8',
+          backgroundColor: '#0a0a14',
+          color: '#e7e9ef',
           fontFamily: 'system-ui, sans-serif',
           padding: 60,
         }}
       >
         <div style={{ fontSize: 72, fontWeight: 700, marginBottom: 24, display: 'flex' }}>
-          CalibratedIQ
+          <span style={{ display: 'flex' }}>Calibrated</span>
+          <span style={{ display: 'flex', color: '#14b8a6' }}>IQ</span>
         </div>
         <div style={{ fontSize: 32, color: '#9ca3af', marginBottom: 48, textAlign: 'center', display: 'flex' }}>
-          Free Scientific IQ Assessment
+          Free IQ tests, scored on a real bell curve
         </div>
         <div style={{ display: 'flex', gap: 40, fontSize: 22, color: '#6b7280' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -39,7 +40,7 @@ export default async function Image() {
             <div style={{ display: 'flex' }}>100% Free</div>
           </div>
         </div>
-        <div style={{ fontSize: 20, color: '#2d6a7a', marginTop: 48, display: 'flex' }}>
+        <div style={{ fontSize: 20, color: '#14b8a6', marginTop: 48, display: 'flex' }}>
           Based on Raven's Progressive Matrices methodology
         </div>
       </div>

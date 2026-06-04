@@ -104,19 +104,20 @@ export default function LearnPage() {
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
 
-      <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-3">
-        Learn About IQ Testing
+      <span className="cq-badge mb-4">Research &amp; methodology</span>
+      <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+        Learn about IQ testing
       </h1>
-      <p className="text-sm text-muted mb-6 max-w-2xl">
+      <p className="text-sm sm:text-base text-muted mb-6 max-w-2xl leading-relaxed">
         Reference material on intelligence testing, scoring methodology, and
         the research behind each cognitive domain.
       </p>
 
       <Link
         href="/tests"
-        className="inline-block px-5 py-2.5 text-sm font-medium bg-primary text-white rounded-lg hover:bg-primary-light transition-colors mb-10"
+        className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold bg-primary text-white rounded-xl hover:bg-primary-light transition-colors shadow-sm mb-10"
       >
-        Take a Test
+        Take a test
       </Link>
 
       {/* First 5 cards */}
@@ -125,7 +126,7 @@ export default function LearnPage() {
           <Link
             key={article.href}
             href={article.href}
-            className="group block p-5 rounded-lg border border-border dark:border-border-dark hover:border-primary/40 dark:hover:border-primary-light/40 transition-colors"
+            className="group block cq-card-link p-5"
           >
             <h2 className="text-base font-semibold mb-1.5 group-hover:text-primary dark:group-hover:text-primary-light transition-colors">
               {article.title}
@@ -148,7 +149,7 @@ export default function LearnPage() {
           <Link
             key={article.href}
             href={article.href}
-            className="group block p-5 rounded-lg border border-border dark:border-border-dark hover:border-primary/40 dark:hover:border-primary-light/40 transition-colors"
+            className="group block cq-card-link p-5"
           >
             <h2 className="text-base font-semibold mb-1.5 group-hover:text-primary dark:group-hover:text-primary-light transition-colors">
               {article.title}

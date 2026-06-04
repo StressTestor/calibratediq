@@ -49,7 +49,7 @@ function renderScoreImage(iq: number, percentile: number, classification: string
           justifyContent: 'center',
           width: '100%',
           height: '100%',
-          backgroundColor: '#0a0a0a',
+          backgroundColor: '#0a0a14',
           color: '#fafafa',
           fontFamily: 'system-ui, sans-serif',
           padding: 48,
@@ -69,7 +69,7 @@ function renderScoreImage(iq: number, percentile: number, classification: string
           {iq}
         </div>
 
-        <div style={{ fontSize: 36, fontWeight: 600, color: '#60a5fa', marginBottom: 8, display: 'flex' }}>
+        <div style={{ fontSize: 36, fontWeight: 600, color: '#14b8a6', marginBottom: 8, display: 'flex' }}>
           {classification}
         </div>
 
@@ -95,12 +95,12 @@ function renderScoreImage(iq: number, percentile: number, classification: string
                   style={{
                     width: 80,
                     height: bar.pct * 2,
-                    backgroundColor: isActive ? '#60a5fa' : '#333',
+                    backgroundColor: isActive ? '#14b8a6' : '#333',
                     borderRadius: 4,
                     display: 'flex',
                   }}
                 />
-                <div style={{ fontSize: 16, color: isActive ? '#60a5fa' : '#666', display: 'flex' }}>
+                <div style={{ fontSize: 16, color: isActive ? '#14b8a6' : '#666', display: 'flex' }}>
                   {bar.label}
                 </div>
               </div>
@@ -124,7 +124,7 @@ function renderDefaultImage() {
           justifyContent: 'center',
           width: '100%',
           height: '100%',
-          backgroundColor: '#0a0a0a',
+          backgroundColor: '#0a0a14',
           color: '#fafafa',
           fontFamily: 'system-ui, sans-serif',
         }}
