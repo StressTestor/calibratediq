@@ -108,21 +108,19 @@ export function RadarChart({ scores, labels }: RadarChartProps): React.ReactNode
           );
         })}
 
-        {/* Score polygon */}
+        {/* Score polygon — translucent brand fill */}
         <polygon
           points={scorePolygon}
           fill="currentColor"
-          className="text-teal-500/25 dark:text-teal-400/25"
-          stroke="currentColor"
-          strokeWidth={2}
-          style={{ color: 'inherit' }}
+          className="text-primary/20 dark:text-primary-light/25"
+          stroke="none"
         />
-        {/* Need separate stroke polygon since fill and stroke can't use different currentColor classes */}
+        {/* Separate stroke polygon (fill and stroke need different colors) */}
         <polygon
           points={scorePolygon}
           fill="none"
           stroke="currentColor"
-          className="text-teal-600 dark:text-teal-400"
+          className="text-primary dark:text-primary-light"
           strokeWidth={2}
           strokeLinejoin="round"
         />
@@ -145,7 +143,7 @@ export function RadarChart({ scores, labels }: RadarChartProps): React.ReactNode
                 stroke="currentColor"
                 strokeWidth={completed ? 0 : 2}
                 className={completed
-                  ? 'text-teal-600 dark:text-teal-400'
+                  ? 'text-primary dark:text-primary-light'
                   : 'text-neutral-400 dark:text-neutral-500'
                 }
               />
@@ -157,7 +155,7 @@ export function RadarChart({ scores, labels }: RadarChartProps): React.ReactNode
                   fontSize={11}
                   fontWeight="bold"
                   fill="currentColor"
-                  className="text-teal-700 dark:text-teal-300"
+                  className="text-primary dark:text-primary-light"
                 >
                   {iq}
                 </text>

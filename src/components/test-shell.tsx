@@ -9,6 +9,7 @@ import { ProgressBar } from '@/components/progress-bar';
 import { Timer } from '@/components/timer';
 import { AdPlaceholder } from '@/components/ad-placeholder';
 import { Question } from '@/lib/tests/types';
+import { tint } from '@/lib/tests/domain-meta';
 
 interface TestShellProps {
   testSlug: string;
@@ -241,18 +242,24 @@ function TestShellContent({
   const question = generateQuestion(seed, questionIndex);
   const showAd = questionIndex > 0 && questionIndex % 5 === 0;
 
-  // Determine difficulty label
+  // Determine difficulty label + its accent color
   let difficultyLabel = 'easy';
   if (questionIndex >= 22) difficultyLabel = 'hard';
   else if (questionIndex >= 10) difficultyLabel = 'medium';
+  const difficultyColor =
+    difficultyLabel === 'hard'
+      ? '#e11d48'
+      : difficultyLabel === 'medium'
+        ? '#d97706'
+        : '#0d9488';
 
   // Analyzing screen — shown after last question before redirect
   if (analyzing) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-6 sm:py-10">
         {/* Progress and timer (frozen) */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex-1 mr-4">
+        <div className="flex items-start justify-between gap-4 mb-6">
+          <div className="flex-1">
             <ProgressBar current={totalQuestions} total={totalQuestions} />
           </div>
           <Timer startTime={startTimeRef.current} running={false} />
@@ -267,8 +274,8 @@ function TestShellContent({
           </p>
 
           {/* Progress bar animation */}
-          <div className="w-full max-w-xs h-1 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden mb-8">
-            <div className="h-full bg-teal-500 dark:bg-teal-400 rounded-full analyzing-bar" />
+          <div className="w-full max-w-xs h-1.5 bg-surface-2 dark:bg-surface-2-dark rounded-full overflow-hidden mb-8">
+            <div className="h-full bg-primary dark:bg-primary-light rounded-full analyzing-bar" />
           </div>
 
           <div className="my-6">
@@ -307,8 +314,8 @@ function TestShellContent({
     return (
       <div className="max-w-2xl mx-auto px-4 py-6 sm:py-10">
         {/* Progress and timer (still visible) */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex-1 mr-4">
+        <div className="flex items-start justify-between gap-4 mb-6">
+          <div className="flex-1">
             <ProgressBar current={progressCount} total={totalQuestions} />
           </div>
           <Timer startTime={startTimeRef.current} running={true} />
@@ -323,8 +330,8 @@ function TestShellContent({
           </p>
 
           {/* Countdown bar */}
-          <div className="w-full max-w-xs h-1 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden mb-8">
-            <div className="h-full bg-teal-500 dark:bg-teal-400 rounded-full interstitial-bar" />
+          <div className="w-full max-w-xs h-1.5 bg-surface-2 dark:bg-surface-2-dark rounded-full overflow-hidden mb-8">
+            <div className="h-full bg-primary dark:bg-primary-light rounded-full interstitial-bar" />
           </div>
 
           <div className="my-6">
@@ -348,16 +355,22 @@ function TestShellContent({
   return (
     <div className="max-w-2xl mx-auto px-4 py-6 sm:py-10">
       {/* Progress and timer */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex-1 mr-4">
+      <div className="flex items-start justify-between gap-4 mb-5">
+        <div className="flex-1">
           <ProgressBar current={questionIndex + 1} total={totalQuestions} />
         </div>
         <Timer startTime={startTimeRef.current} running={true} />
       </div>
 
       {/* Difficulty label */}
-      <div className="mb-4">
-        <span className="text-xs font-medium uppercase tracking-wide text-muted">
+      <div className="mb-5">
+        <span
+          className="cq-badge"
+          style={{
+            backgroundColor: tint(difficultyColor),
+            color: difficultyColor,
+          }}
+        >
           {difficultyLabel}
         </span>
       </div>
@@ -378,14 +391,15 @@ function TestShellContent({
           {question.options.map((option, i) => {
             const isClicked = clickedIndex === i;
 
-            let borderClass =
-              'border-2 border-neutral-200 dark:border-neutral-700';
+            let stateClass =
+              'border-border dark:border-border-dark shadow-sm';
             if (isClicked) {
-              borderClass = 'border-2 border-teal-500 dark:border-teal-400';
+              stateClass =
+                'border-primary dark:border-primary-light ring-2 ring-primary/30 dark:ring-primary-light/30 bg-primary/[0.04] dark:bg-primary-light/10';
             }
 
             const hoverClass = !revealing
-              ? 'hover:border-neutral-400 dark:hover:border-neutral-500 cursor-pointer'
+              ? 'hover:border-primary/50 dark:hover:border-primary-light/50 hover:shadow-md cursor-pointer'
               : 'opacity-60 cursor-default';
 
             return (
@@ -394,7 +408,7 @@ function TestShellContent({
                 type="button"
                 disabled={revealing}
                 onClick={() => handleAnswer(i)}
-                className={`relative flex items-center justify-center rounded-lg p-2 transition-colors duration-100 bg-white dark:bg-neutral-900 ${borderClass} ${hoverClass}`}
+                className={`relative flex items-center justify-center rounded-xl border-2 p-2 transition-all duration-100 bg-surface dark:bg-surface-dark ${stateClass} ${hoverClass}`}
                 style={{ aspectRatio: '1 / 1' }}
               >
                 <span className="absolute top-1 left-2 text-xs font-medium text-neutral-400 dark:text-neutral-500 select-none">

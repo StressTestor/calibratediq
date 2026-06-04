@@ -31,7 +31,12 @@ export function Timer({ startTime, running }: TimerProps): React.ReactNode {
   }, [startTime, running]);
 
   return (
-    <span className="text-sm text-neutral-400 dark:text-neutral-500 tabular-nums font-mono select-none">
+    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-2 dark:bg-surface-2-dark text-xs font-mono tabular-nums text-muted select-none">
+      <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden="true">
+        <circle cx="8" cy="9" r="5.5" fill="none" stroke="currentColor" strokeWidth="1.3" />
+        <path d="M8 6.2V9l2 1.4" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M6 2h4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+      </svg>
       {formatElapsed(elapsed)}
     </span>
   );

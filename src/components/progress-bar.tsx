@@ -10,17 +10,14 @@ export function ProgressBar({ current, total }: ProgressBarProps): React.ReactNo
 
   return (
     <div className="w-full">
-      <div className="flex items-center justify-between mb-1">
-        <span className="text-xs text-neutral-500 dark:text-neutral-400 font-medium">
-          Question {current} of {total}
-        </span>
-        <span className="text-xs text-neutral-400 dark:text-neutral-500 tabular-nums">
-          {Math.round(pct)}%
+      <div className="flex items-baseline justify-between mb-1.5">
+        <span className="text-xs font-medium text-muted">
+          Question <span className="tabular-nums text-text dark:text-text-dark">{current}</span> of {total}
         </span>
       </div>
-      <div className="w-full h-1.5 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+      <div className="w-full h-2 bg-surface-2 dark:bg-surface-2-dark rounded-full overflow-hidden">
         <div
-          className="h-full bg-teal-600 dark:bg-teal-500 rounded-full transition-all duration-300 ease-out"
+          className="h-full bg-primary dark:bg-primary-light rounded-full transition-all duration-300 ease-out"
           style={{ width: `${pct}%` }}
         />
       </div>
