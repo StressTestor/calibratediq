@@ -124,7 +124,7 @@ export function cellTransform(cell: CellState): string {
 
 // Applies cellTransform to a point: SVG applies the rightmost transform first,
 // so rotate, then reflect.
-function transformPoint(cell: CellState, [x, y]: Point): Point {
+export function transformPoint(cell: CellState, [x, y]: Point): Point {
   const c = CELL_VIEW_SIZE / 2;
   const dx = x - c;
   const dy = y - c;
@@ -137,8 +137,11 @@ function transformPoint(cell: CellState, [x, y]: Point): Point {
   return [px, py];
 }
 
+// Snap to 1e-6 first so mirror-image coordinates that differ only by
+// floating-point noise (e.g. 54.44499999 vs 54.445) round the same way.
 function fmt(n: number): string {
-  const rounded = Math.round(n * 100) / 100;
+  const snapped = Math.round(n * 1e6) / 1e6;
+  const rounded = Math.round(snapped * 100) / 100;
   return (rounded === 0 ? 0 : rounded).toFixed(2);
 }
 
