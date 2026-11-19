@@ -8,6 +8,7 @@ import {
   applyTransform, ALL_TRANSFORMS,
   getDimensionIndex, getDimensionValues, applyWrongValue
 } from './transformations';
+import { visualKey } from './cell-geometry';
 
 export interface Puzzle {
   grid: (CellState | null)[][]; // null = the missing cell (answer position)
@@ -113,7 +114,8 @@ export function generatePuzzle(
   };
 }
 
-// Generate 5 distractors, each violating exactly 1 rule
+// Generate 5 distractors, each violating exactly 1 rule. Candidates that render
+// identically to the answer or another distractor are skipped.
 function generateDistractors(
   answer: CellState,
   transforms: TransformType[],
@@ -121,7 +123,7 @@ function generateDistractors(
 ): CellState[] {
   const distractors: CellState[] = [];
   const seen = new Set<string>();
-  seen.add(cellKey(answer));
+  seen.add(visualKey(answer));
 
   // Strategy: cycle through transforms, apply wrong values
   // For each transform, generate wrong values for that dimension
@@ -140,7 +142,7 @@ function generateDistractors(
 
     if (wrongIdx !== currentIdx) {
       const distractor = applyWrongValue(answer, transform, wrongIdx);
-      const key = cellKey(distractor);
+      const key = visualKey(distractor);
 
       if (!seen.has(key)) {
         seen.add(key);
@@ -162,7 +164,7 @@ function generateDistractors(
       for (let offset = 1; offset < numValues && distractors.length < 5; offset++) {
         const wrongIdx = (currentIdx + offset) % numValues;
         const distractor = applyWrongValue(answer, transform, wrongIdx);
-        const key = cellKey(distractor);
+        const key = visualKey(distractor);
 
         if (!seen.has(key)) {
           seen.add(key);
