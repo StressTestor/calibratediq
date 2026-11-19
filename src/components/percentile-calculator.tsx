@@ -58,7 +58,7 @@ export function PercentileCalculator(): React.ReactNode {
           {mensaQualified && (
             <div className="rounded-lg border border-teal-300 dark:border-teal-700 bg-teal-50 dark:bg-teal-900/30 p-4 text-sm text-muted">
               <strong className="text-text dark:text-text-dark">Mensa qualification:</strong>{' '}
-              A score of {iq} places you at or above the 98th percentile, which meets the threshold
+              A score of {iq} is at or above IQ 130 (the top ~2%), which meets the threshold
               for{' '}
               <a
                 href="https://www.mensa.org/"
